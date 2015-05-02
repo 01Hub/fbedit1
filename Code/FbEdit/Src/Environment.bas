@@ -55,7 +55,7 @@ Function EnvironProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WP
 
         GetWindowRect hWin, @DlgRect                                 ' startup position for non existing ini file entry
         LoadFromIni "Win", "EnvironDlgPos", "4444", @DlgRect, FALSE
-        SetWindowPos hWin, HWND_TOP, DlgRect.Left, DlgRect.Top, DlgRect.Right - DlgRect.Left, DlgRect.Bottom - DlgRect.Top, NULL
+        SetWindowPos hWin, HWND_TOP, DlgRect.Left, DlgRect.Top, DlgRect.Right - DlgRect.Left, DlgRect.Bottom - DlgRect.Top, 0
 
         ' build all grids
         For i = 1 To UBound (EnvDlgGrdItems)
@@ -343,7 +343,7 @@ Function EnvironProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WP
             hDlgItem = GetDlgItem (hWin, EnvDlgGrdItems(i))
             GetWindowRect hDlgItem, @ItemRect
             MapWindowPoints NULL, hWin, Cast (Point Ptr, @ItemRect), 2
-            SetWindowPos hDlgItem, HWND_TOP, ItemRect.Left, ItemRect.Top + (i - 1) * dH \ EnvDlgGrdCount, ItemRect.Right - ItemRect.Left + dW, ItemRect.Bottom - ItemRect.Top + dH \ EnvDlgGrdCount, NULL 'DLG Coords
+            SetWindowPos hDlgItem, HWND_TOP, ItemRect.Left, ItemRect.Top + (i - 1) * dH \ EnvDlgGrdCount, ItemRect.Right - ItemRect.Left + dW, ItemRect.Bottom - ItemRect.Top + dH \ EnvDlgGrdCount, 0 'DLG Coords
         Next
 
         For i = 1 To EnvDlgGrdCount

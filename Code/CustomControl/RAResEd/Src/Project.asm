@@ -252,11 +252,12 @@ OpenProject proc uses esi,lpFileName:DWORD,hRCMem:DWORD
 	invoke GlobalUnlock,hRCMem
 	invoke GlobalFree,hRCMem
 	pop		eax
-	pop		edx
+;	pop		edx                                                  ; *** MOD (Cherry)
 	.if eax==-1
 		jmp		Ex
 	.endif
 	mov		esi,hProMem
+	mov     edx,lpFileName                                       ; *** MOD (Cherry)
 	invoke Do_TreeViewAddNode,hPrjTrv,TVI_ROOT,TVI_FIRST,edx,0,0,esi
 	mov		hRoot,eax
 	.while [esi].PROJECT.hmem

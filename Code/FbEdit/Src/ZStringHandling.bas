@@ -467,7 +467,7 @@ Sub SplitStr (ByRef Source As ZString, ByVal Delimiter As UByte, ByRef pPartB As
     Do
         Select Case Source[n]
         Case Delimiter
-            Source[n] = NULL
+            Source[n] = 0
             pPartB = @Source[n + 1]
             Exit Sub
         Case 0
@@ -495,7 +495,7 @@ Sub SplitStrQuoted (ByRef Source As ZString, ByVal Delimiter As UByte, ByRef pPa
     Do
         Select Case Source[n]
         Case Delimiter
-            Source[n] = NULL
+            Source[n] = 0
             pPartB = @Source[n + 1]
             Exit Sub
         Case Asc (!"\"")
@@ -756,7 +756,7 @@ Function EncloseString (ByRef Source As ZString, ByVal SourceSize As Integer, By
                 Return FALSE
             EndIf
             Source[L]     = EncloseChar                       ' postfix it
-            Source[L + 1] = NULL
+            Source[L + 1] = 0
         EndIf
     Else
         If SourceSize < 3 Then
@@ -764,7 +764,7 @@ Function EncloseString (ByRef Source As ZString, ByVal SourceSize As Integer, By
         EndIf
         Source[0] = EncloseChar
         Source[1] = EncloseChar
-        Source[2] = NULL
+        Source[2] = 0
     EndIf
 
     Return TRUE

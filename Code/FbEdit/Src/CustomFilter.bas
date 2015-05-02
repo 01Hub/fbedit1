@@ -13,7 +13,7 @@
     #Include Once "Inc\ZStringHandling.bi"
 
     #Include Once "Inc\CustomFilter.bi"
-    #Include Once "showvars.bi"
+    #Include Once "Inc\showvars.bi"
 
 
     Declare Sub CustomFilterReplace (ByRef hEditor As HWND)

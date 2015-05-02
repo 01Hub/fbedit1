@@ -15,7 +15,9 @@
 #Include Once "win\commdlg.bi"
 #Include Once "win\shellapi.bi"
 #Include Once "win\shlwapi.bi"
-#Include Once "regex.bi"                                                 ' MOD 16.2.2012
+
+#Define __crt_string_bi__
+#Include Once "tre\regex.bi"                                                 ' MOD 16.2.2012
 
 #Include Once "Inc\RAEdit.bi"
 #Include Once "Inc\RAFile.bi"

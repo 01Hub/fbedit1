@@ -1036,7 +1036,7 @@ Function RemoveProjectPath (ByRef sFile As ZString) As ZString Ptr     ' MOD 7.1
     ' ProjectPath = c:\path1\path2
     ' result      = .\FileBaseName.ext
 
-    Success = PathRelativePathTo (@OutString, @ad.ProjectPath, FILE_ATTRIBUTE_DIRECTORY, @sFile, NULL)
+    Success = PathRelativePathTo (@OutString, @ad.ProjectPath, FILE_ATTRIBUTE_DIRECTORY, @sFile, 0)
 
     If Success Then
         If OutString[1] = Asc("\") AndAlso OutString[0] = Asc(".") Then
@@ -1113,7 +1113,7 @@ Sub SelectTrvItem(Byref sFile As ZString)
 		sSelect = *RemoveProjectPath (sFile)
 		'sSelect=sFile
 		'sSelect=*RemoveProjectPath(sSelect)
-		hRootItem = Cast (HTREEITEM, SendMessage (ah.hprj, TVM_GETNEXTITEM, TVGN_ROOT, NULL))
+		hRootItem = Cast (HTREEITEM, SendMessage (ah.hprj, TVM_GETNEXTITEM, TVGN_ROOT, 0))
 		hItem = GetTrvItem (hRootItem, sSelect)
 		If hItem Then
 			SendMessage ah.hprj, TVM_SELECTITEM, TVGN_CARET, Cast (LPARAM, hItem)
@@ -2068,7 +2068,7 @@ Function NewProjectTab1Proc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam A
 				sItem=Str(nInx)
 				GetPrivateProfileString(StrPtr("Make"),@sItem,NULL,@buff,260,@ad.IniFile)
 				If IsZStrNotEmpty (buff) Then
-        			ReplaceChar1stHit buff, Asc (","), NULL
+        			ReplaceChar1stHit buff, Asc (","), 0
 					SendDlgItemMessage(hWin,IDC_CBOPROJECTTYPE,CB_ADDSTRING,0,Cast(Integer,@buff))
 				EndIf
 				nInx+=1

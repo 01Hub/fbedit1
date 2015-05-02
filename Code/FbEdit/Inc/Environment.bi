@@ -48,14 +48,14 @@ Dim Shared EnvDlgStcItems(1 To EnvDlgGrdCount) As Integer => { IDC_STC_READONLY,
                                                                IDC_STC_USERSTRING  _
                                                              }
 
-Dim Shared EnvDlgAddItems(1 To EnvDlgGrdCount) As Integer => { NULL,                  _
-                                                               NULL,                  _
+Dim Shared EnvDlgAddItems(1 To EnvDlgGrdCount) As Integer => { 0,                  _
+                                                               0,                  _
                                                                IDC_BTN_ADD_USERPATH,  _
                                                                IDC_BTN_ADD_USERSTRING _
                                                              }
 
-Dim Shared EnvDlgDelItems(1 To EnvDlgGrdCount) As Integer => { NULL,                  _
-                                                               NULL,                  _
+Dim Shared EnvDlgDelItems(1 To EnvDlgGrdCount) As Integer => { 0,                  _
+                                                               0,                  _
                                                                IDC_BTN_DEL_USERPATH,  _
                                                                IDC_BTN_DEL_USERSTRING _
                                                              }

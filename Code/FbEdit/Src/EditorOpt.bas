@@ -35,10 +35,15 @@ Dim Shared edtopt        As EDITOPTION = (3,0,0,1,0,0,3,1,1,1,1,1,1,0,0,0,1,1,1,
 Dim Shared fbcol         As FBCOLOR    = ((DEFBCKCOLOR,DEFTXTCOLOR,DEFSELBCKCOLOR,DEFSELTXTCOLOR,DEFCMNTCOLOR,DEFSTRCOLOR,DEFOPRCOLOR,DEFHILITE1,DEFHILITE2,DEFHILITE3,DEFSELBARCOLOR,DEFSELBARPEN,DEFLNRCOLOR,DEFNUMCOLOR,DEFCMNTBCK,DEFSTRBCK,DEFNUMBCK,DEFOPRBCK,DEFCHANGEDCLR,DEFCHANGESAVEDCLR),DEFBCKCOLOR,DEFTXTCOLOR,DEFBCKCOLOR,DEFTXTCOLOR)
 Dim Shared kwcol         As KWCOLOR    = (RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),RGB(64,64,0),RGB(128,0,0),RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),&H1000000+RGB(0,0,128),&H4000000+RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),RGB(0,0,128),&H1000000+RGB(0,255,255),&H1000000+RGB(0,255,255),&H1000000+RGB(0,255,255))
 
-Dim Shared edtfnt        As EDITFONT   = (-12, 0, @"Courier New", 400, 0)
-Dim Shared lnrfnt        As EDITFONT   = ( -6, 0, @"Terminal"   , 400, 0)
-Dim Shared outpfnt       As EDITFONT   = (-11, 0, @"Tahoma"     , 400, 0)
-Dim Shared toolfnt       As EDITFONT   = (-11, 0, @"Tahoma"     , 400, 0)
+Dim Shared EdtFntFaceName   As ZString * LF_FACESIZE = "Courier New"                           ' Cherry
+Dim Shared LnrFntFaceName   As ZString * LF_FACESIZE = "Terminal"
+Dim Shared OutFntFaceName   As ZString * LF_FACESIZE = "Tahoma"
+Dim Shared ToolFntFaceName  As ZString * LF_FACESIZE = "Tahoma"
+
+Dim Shared edtfnt        As EDITFONT   = (-12, 0, @EdtFntFaceName , 400, 0)
+Dim Shared lnrfnt        As EDITFONT   = ( -6, 0, @LnrFntFaceName , 400, 0)
+Dim Shared outpfnt       As EDITFONT   = (-11, 0, @OutFntFaceName , 400, 0)
+Dim Shared toolfnt       As EDITFONT   = (-11, 0, @ToolFntFaceName, 400, 0)
 
 Dim Shared custcol       As KWCOLOR
 Dim Shared thme(15)      As THEME

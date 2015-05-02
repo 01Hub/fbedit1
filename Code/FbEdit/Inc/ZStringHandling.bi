@@ -26,22 +26,22 @@ Declare Function FormatDEVStr (ByRef Source As ZString, ByVal SourceSize As Inte
 
 
 #Macro IsZStrNotEmpty (ZStrName)
-    ((ZStrName)[0] <> NULL)
+    ((ZStrName)[0] <> 0)
 #EndMacro
 
 #Macro IsZStrEmpty (ZStrName)
-    ((ZStrName)[0] = NULL)
+    ((ZStrName)[0] = 0)
 #EndMacro
 
 #Macro IsZStrNotEmpty2 (ZStrName)
-    (StrPtr (ZStrName) <> 0) AndAlso ((ZStrName)[0] <> NULL)
+    (StrPtr (ZStrName) <> 0) AndAlso ((ZStrName)[0] <> 0)
 #EndMacro
 
 #Macro IsZStrEmpty2 (ZStrName)
-    (StrPtr (ZStrName) = 0) OrElse ((ZStrName)[0] = NULL)
+    (StrPtr (ZStrName) = 0) OrElse ((ZStrName)[0] = 0)
 #EndMacro
 
 #Macro SetZStrEmpty (ZStrName)
-    (ZStrName)[0] = NULL
+    (ZStrName)[0] = 0
 #EndMacro
 
