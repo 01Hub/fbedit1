@@ -4,65 +4,65 @@
 
 echo .
 echo *** build RACodeComplete ***
-cd Code\RACodeComplete
+cd Code\CustomControl\RACodeComplete
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAEdit ***
-cd Code\RAEdit
+cd Code\CustomControl\RAEdit
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAFile ***
-cd Code\RAFile
+cd Code\CustomControl\RAFile
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAGrid ***
-cd Code\RAGrid
+cd Code\CustomControl\RAGrid
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAHexEd ***
-cd Code\RAHexEd
+cd Code\CustomControl\RAHexEd
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAProject ***
-cd Code\RAProject
+cd Code\CustomControl\RAProject
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAProperty ***
-cd Code\RAProperty
+cd Code\CustomControl\RAProperty
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RAResEd ***
-cd Code\RAResEd
+cd Code\CustomControl\RAResEd
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .
 echo *** build RATools ***
-cd Code\RATools
+cd Code\CustomControl\RATools
 call make.bat || goto ERR_Exit
-cd ..\..
+cd ..\..\..
 
 
 echo .

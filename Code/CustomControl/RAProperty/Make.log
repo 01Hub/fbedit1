@@ -3,7 +3,7 @@ Copyright (C) Microsoft Corp. 1985-1998. All rights reserved.
 
 Using codepage 1252 as default
 Creating RAProperty.res
-RC: RCPP -CP 1252 -f C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAProperty\RCa03596 -g C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAProperty\RDa03596 -DRC_INVOKED -D_WIN32 -pc\:/ -E -I. -I Src\ -I .
+RC: RCPP -CP 1252 -f C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAProperty\RCa02876 -g C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAProperty\RDa02876 -DRC_INVOKED -D_WIN32 -pc\:/ -E -I. -I Src\ -I .
 
 Src\RAProperty.rc.
 Writing BITMAP:100,	lang:0x409,	size 344.

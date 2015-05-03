@@ -241,7 +241,7 @@ Sub MakeApiFile(ByVal hWin As HWND,ByRef szPrefix As ZString,ByVal nType As Inte
 	hFile=CreateFile(@szFileName,GENERIC_WRITE Or GENERIC_READ,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL)
 	If hFile<>INVALID_HANDLE_VALUE Then
 		If nType=4 Or nType=5 Then
-			WriteFile(hFile,@szLine,Len(szLine),@dwWrite,NULL)
+			WriteFile( HFILE,@szLine,Len(szLine),@dwWrite,NULL)
 		Else
 			While TRUE
 				If SendMessage(lpRAPROPERTY->hlst,LB_GETTEXT,i,Cast(LPARAM,@szWord))<>LB_ERR Then

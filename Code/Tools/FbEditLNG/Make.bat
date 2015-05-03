@@ -12,7 +12,7 @@ windres --version
 IF %ERRORLEVEL% EQU 9009 (
     echo windres not found
 ) else (
-    windres --verbose --output-format=coff --include-dir="../../FbEdit/" --include-dir="../../FbEdit/Res"  "Res\FbEditLNG.Rc" "FbEditLNG.Rc.o" > Make.log || goto ERR_Exit
+    windres --verbose --output-format=coff --target=pe-i386 --include-dir="../../FbEdit/" --include-dir="../../FbEdit/Res"  "Res\FbEditLNG.Rc" "FbEditLNG.Rc.o" > Make.log || goto ERR_Exit
     goto RC_Ready
 )
 
