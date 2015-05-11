@@ -151,6 +151,10 @@ FbEditMOD 1.0.7.8
         there is a new editbox for a list of extensions
         Load For Project Search: these files are loaded during project wide searches
 
+     - Context menu tab control
+        there is a new menu item "Open Explorer here"
+        opens an explorer window at location specified by current tab
+        
 
       *** incomplete ***
 

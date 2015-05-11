@@ -41,6 +41,8 @@ Dim Shared lpOldTabToolProc As WNDPROC
 Dim Shared curtab           As Integer = -1
 Dim Shared prevtab          As Integer = -1
 
+Dim Shared hToolTipWindow   As HWND
+
 
 Sub SaveProjectTabOrder ()
 
@@ -1803,6 +1805,62 @@ Sub UpdateAllTabs (ByVal nType As Integer)
 
 End Sub
 
+'Sub  TabToolInit ()
+'    
+'    Print "TabToolInit"
+'    
+'    Dim Balloon  As TOOLINFO 
+'    
+'    hToolTipWindow = Cast(HWND, SendMessage(ah.htabtool, TCM_GETTOOLTIPS,0,0))
+    
+    
+    
+    'If hToolTipWindow = NULL Then
+    'Dim iccex As INITCOMMONCONTROLSEX
+
+    'iccex.dwICC = ICC_WIN95_CLASSES
+    'iccex.dwSize = SizeOf (INITCOMMONCONTROLSEX)
+    'InitCommonControlsEx @iccex
+    
+    
+        'hToolTipWindow = CreateWindowEx (NULL, TOOLTIPS_CLASS, NULL, _
+        '                    WS_POPUP  Or TTS_ALWAYSTIP, _
+        '                    CW_USEDEFAULT, _
+        '                    CW_USEDEFAULT, _
+        '                    CW_USEDEFAULT, _
+        '                    CW_USEDEFAULT, _
+        '                    ah.htabtool, NULL, hInstance, NULL) 
+        ''SetWindowPos (hToolTipWindow, HWND_TOPMOST,0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOACTIVATE)
+        'SendMessage hToolTipWindow, TTM_ACTIVATE, TRUE, 0 
+             
+        'Print "hToolTipWindow"; hToolTipWindow
+        'Print "hInstance"; hInstance
+        'Print "ah.htabtool"; ah.htabtool
+        'Print "ah.hwnd"; ah.hwnd
+       
+        'If hToolTipWindow = NULL Then Exit Sub
+     
+        'SendMessage hToolTipWindow, TTM_SETMAXTIPWIDTH, 0, 180 
+        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_INITIAL, 50 
+        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_RESHOW, 50
+        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_AUTOPOP, 10000
+    
+    'End If
+     
+    'With Balloon
+    '    .cbSize   = SizeOf (TOOLINFO) 
+    '    .uFlags   = TTF_IDISHWND Or TTF_SUBCLASS 
+    '    .hwnd     = NULL                  ' ignored if TTF_IDISHWD
+    '    .uId      = Cast (UINT_PTR, ah.htabtool) 
+    '    '.hinst    = hInstance
+    '    .lpszText = @"Test1" 
+    'End With
+    ' 
+    'SendMessage hToolTipWindow, TTM_SETTOOLINFO, 0, Cast (LPARAM, @Balloon)
+    'SendMessage hToolTipWindow, TTM_TRACKACTIVATE, TRUE, Cast (LPARAM, @Balloon)
+
+'End Sub
+
 Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 	
 	Dim TabID             As LRESULT = Any
@@ -1895,7 +1953,18 @@ Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPAR
             ClipCursor @TabRECT
         EndIf
         Return 0
-
+	
+	'Case WM_NOTIFY
+	'    #Define lpNMTDI Cast (LPNMTTDISPINFO, lParam)
+    '        
+    '    Print "TabTool:WM_NOTIFY:"; lpNMTDI->hdr.code       
+    '    'If lpNMTDI->NMTTDISPINFOnmhdr.hwndFrom = ah.htabtool Then
+    '        If lpNMTDI->hdr.code = TTN_GETDISPINFO Then
+    '            Print "TTN_GETDISPINFO "; lpNMTDI->hdr.hwndFrom
+    '        EndIf
+    '            
+    '    #Undef lpNMTDI  
+	
 	End Select
 	Return CallWindowProc (lpOldTabToolProc, hWin, uMsg, wParam, lParam)
 

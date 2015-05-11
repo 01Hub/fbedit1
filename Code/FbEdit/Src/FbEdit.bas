@@ -420,6 +420,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
             DoToolbar ah.htoolbar, __FB_DEBUG__
 
             SbarInit
+            'TabToolInit
 
             SetWindowLong ah.htabtool, GWL_ID, IDC_TABSELECT
             lpOldTabToolProc = Cast (WNDPROC, SetWindowLong (ah.htabtool, GWL_WNDPROC, Cast (Long, @TabToolProc)))
@@ -456,6 +457,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                 If DirExists (@ad.DefProjectPath) = FALSE Then
                     ad.DefProjectPath = ad.AppPath
                 EndIf
+                WritePrivateProfileString "EnvironPath", "PROJECTS_PATH", @ad.DefProjectPath, @ad.IniFile
                 TextToOutput "*** defaulting project path ***", MB_ICONHAND
                 TextToOutput "Replacement: " + ad.DefProjectPath
             EndIf
@@ -2080,7 +2082,20 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                         Case IDM_WINDOW_UNLOCKALL
                             UnlockAllTabs
                             fTimer = 1
-                            '
+                            
+                        Case IDM_WINDOW_EXPLORER_HERE
+                            UpdateEnvironment
+
+                            Dim SInfo  As STARTUPINFO
+                            Dim PInfo  As PROCESS_INFORMATION
+                            
+                            FileSpec = ad.filename
+                            PathRemoveFileSpec @FileSpec
+                            buff = "explorer.exe /e," + QUOTE + FileSpec + QUOTE
+                            CreateProcess NULL, buff, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, @SInfo, @PInfo
+                            CloseHandle PInfo.hProcess
+                            CloseHandle PInfo.hThread
+                            
                         Case IDM_OUTPUT_CLEAR
                             SendMessage ah.hout, WM_SETTEXT, 0, Cast (LPARAM, @"")
                             UpdateAllTabs (6)          ' clear all bookmarks
@@ -2669,16 +2684,24 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                 #Undef pTOOLTIPTEXT
             EndIf
 
-
-
-
+    	    '#Define lpNMTDI Cast (LPNMTTDISPINFO, lParam)
+            '    
+            '    Print "FbEdit:WM_NOTIFY:"; lpNMTDI->hdr.code       
+            '    'If lpNMTDI->NMTTDISPINFOnmhdr.hwndFrom = ah.htabtool Then
+            '        If lpNMTDI->hdr.code = TTN_GETDISPINFO Then
+            '            Print "TTN_GETDISPINFO "; lpNMTDI->hdr.hwndFrom
+            '        EndIf
+            '        
+            '        
+            '        
+    	    '#Undef lpNMTDI  
 
             'TODO
             ' Statusbar click
 
-            If      Cast(NMMOUSE Ptr, LPARAM)->hdr.hwndFrom = ah.hsbr _
-            AndAlso Cast(NMMOUSE Ptr, LPARAM)->hdr.idFrom   = IDC_STATUSBAR _
-            AndAlso Cast(NMMOUSE Ptr, LPARAM)->hdr.code     = NM_CLICK Then
+            If      Cast(NMMOUSE Ptr, lParam)->hdr.hwndFrom = ah.hsbr _
+            AndAlso Cast(NMMOUSE Ptr, lParam)->hdr.idFrom   = IDC_STATUSBAR _
+            AndAlso Cast(NMMOUSE Ptr, lParam)->hdr.code     = NM_CLICK Then
                 Select Case Cast(NMMOUSE Ptr, LPARAM)->dwItemSpec
                 Case 1
                     SendMessage ah.hwnd, WM_COMMAND, IDM_WINDOW_TOGGLE_LOCK, 0

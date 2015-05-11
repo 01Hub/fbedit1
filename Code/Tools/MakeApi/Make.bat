@@ -1,11 +1,5 @@
-setlocal enableDelayedExpansion
 @echo off
-
-echo FBHome: %FBHome%
-echo FBC_PATH: %FBC_PATH%
-set xyz="a a"
-echo xyz:%xyz%
-echo xyz:%xyz%
+setlocal enableDelayedExpansion
 
 
 if "%FBC_PATH%"=="" (
@@ -14,15 +8,12 @@ if "%FBC_PATH%"=="" (
     set FBHome=!FBC_PATH!
 )
 
-echo FBHome: %FBHome%
-echo FBC_PATH: %FBC_PATH%
-
 
 echo.
 echo *** compiling bas files ***
 if /i "%1"=="DEBUG" (
     echo DEBUG
-    !FBHome!\fbc -v -g "Src\MakeApi.Bas" "Res\MakeApi.Rc" -x "Build\MakeApi.exe" > Make.log || goto ERR_Exit
+    "!FBHome!\fbc" -v -g "Src\MakeApi.Bas" "Res\MakeApi.Rc" -x "Build\MakeApi.exe" > Make.log || goto ERR_Exit
 ) else ( 
     echo RELEASE
     "!FBHome!\fbc" -s gui -v "Src\MakeApi.Bas" "Res\MakeApi.Rc" -x "Build\MakeApi.exe" > Make.log || goto ERR_Exit
