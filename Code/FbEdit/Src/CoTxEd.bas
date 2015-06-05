@@ -113,7 +113,7 @@ Sub GetLineUpToCaret (ByVal hWin As HWND, ByRef pBuff As ZString Ptr, ByRef Line
     'The copied line will not contain a terminating null character
     Length = SendMessage (hWin, EM_GETLINE, LineNo, Cast (LPARAM, pBuff))
 
-    pBuff[Length] = NULL                ' fix it
+    pBuff[Length] = 0                  ' fix it
 
 End Sub
 

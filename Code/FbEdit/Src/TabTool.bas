@@ -34,6 +34,7 @@
 #Define IDC_LSTFILES				1001
 #Define IDC_BTNSELECT				1002
 #Define IDC_BTNDESELECT				1003
+#Define IDD_TABSELECT_INFO          1800
 
 
 Dim Shared fUnicode         As Integer
@@ -1805,10 +1806,14 @@ Sub UpdateAllTabs (ByVal nType As Integer)
 
 End Sub
 
-'Sub  TabToolInit ()
+Sub  TabToolInit ()
 '    
 '    Print "TabToolInit"
 '    
+
+    hToolTipWindow = CreateDialog (hInstance, MAKEINTRESOURCE (IDD_TABSELECT_INFO), NULL, NULL)    ' style: NOT visible
+
+
 '    Dim Balloon  As TOOLINFO 
 '    
 '    hToolTipWindow = Cast(HWND, SendMessage(ah.htabtool, TCM_GETTOOLTIPS,0,0))
@@ -1859,7 +1864,67 @@ End Sub
     'SendMessage hToolTipWindow, TTM_SETTOOLINFO, 0, Cast (LPARAM, @Balloon)
     'SendMessage hToolTipWindow, TTM_TRACKACTIVATE, TRUE, Cast (LPARAM, @Balloon)
 
-'End Sub
+End Sub
+
+Sub TabToolTip (ByRef MousePos As POINT)
+
+	Dim ToolTipRECT        As RECT
+	Dim TextRECT           As RECT
+	Dim ToolTipDC          As HDC
+    Dim ToolTipTXT(1 To 3) As ZString * 1024
+	Dim ToolTipTM          As TEXTMETRIC
+	Dim HalfLF             As Integer = Any
+	Dim IndentWidth        As Integer = Any
+	Dim TextWidthMax       As Integer = Any
+	Dim TextHeightTotal    As Integer = Any
+	Dim TextHeight(1 To 3) As Integer = Any
+	Dim i                  As Integer = Any 
+	
+	ToolTipDC = GetDC (hToolTipWindow)
+	GetClientRect hToolTipWindow, @ToolTipRECT  
+	SelectObject ToolTipDC, ah.hToolFont
+    SetBkColor ToolTipDC, GetSysColor (COLOR_BTNFACE)
+    GetTextMetrics ToolTipDC, @ToolTipTM
+    HalfLF = ToolTipTM.tmHeight \ 2
+    IndentWidth = ToolTipTM.tmAveCharWidth * 2                                      ' indent = 2 chars
+
+    PathWrap @ad.filename, @ToolTipTXT(1), SizeOf (ToolTipTXT)                      ' text line 1    
+
+    If GetModifyFlag (ah.hred) = TRUE Then                                          ' text line 2    
+        ToolTipTXT(2) = "DirtyFlag: Modified"
+    Else
+        ToolTipTXT(2) = "DirtyFlag: Unmodified"
+    EndIf
+	
+    ToolTipTXT(3) = "FileSize: " + Str (GetFileMemUsage (ah.hred)) + " bytes"       ' text line 3
+	
+	TextWidthMax = 0                                                                ' calc printing area
+	TextHeightTotal = HalfLF
+	For i = 1 To 3
+	    DrawText ToolTipDC, @ToolTipTXT(i), -1, @ToolTipRECT, DT_CALCRECT
+	    If ToolTipRECT.right > TextWidthMax Then
+	        TextWidthMax = ToolTipRECT.right
+	    EndIf
+	    TextHeight(i) = ToolTipRECT.bottom
+	    TextHeightTotal += ToolTipRECT.bottom + HalfLF
+	Next
+	TextWidthMax += IndentWidth * 2                                                 ' indent left + indent right
+	
+	SetWindowPos (hToolTipWindow, HWND_TOPMOST, MousePos.x, MousePos.y + 15, TextWidthMax, TextHeightTotal, SWP_SHOWWINDOW)
+	
+    TextRECT.left = IndentWidth
+    TextRECT.top = HalfLF
+    TextRECT.right = TextWidthMax
+    TextRECT.bottom = TextHeightTotal
+    
+    For i = 1 To 3                                                                  ' do printing
+	    DrawText ToolTipDC, @ToolTipTXT(i), -1, @TextRECT, DT_LEFT
+        TextRECT.top += TextHeight(i) + HalfLF
+    Next 
+
+	ReleaseDC hToolTipWindow, ToolTipDC
+
+End Sub
 
 Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 	
@@ -1898,6 +1963,10 @@ Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPAR
 			SelectTabByTabID TabID
 			SetFocus ah.hred
 			TabIDLastEvent = TabID
+			
+			ClientToScreen hWin, @HitInfo.pt             ' overwrites HitInfo.pt
+			TabToolTip HitInfo.pt 
+			
 			fTimer = 1
 			Return 0
 		EndIf
@@ -1910,6 +1979,8 @@ Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPAR
         ShowCursor TRUE
         ClipCursor NULL
         ReleaseCapture
+
+        ShowWindow hToolTipWindow, SW_HIDE
 
 		HitInfo.pt.x = LoWord (lParam)
 		HitInfo.pt.y = HiWord (lParam)

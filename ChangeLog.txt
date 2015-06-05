@@ -154,7 +154,11 @@ FbEditMOD 1.0.7.8
      - Context menu tab control
         there is a new menu item "Open Explorer here"
         opens an explorer window at location specified by current tab
-        
+     
+     - tab control
+        left mouse button (click and hold) shows a tooltip window containing some information about this tab    
+
+
 
       *** incomplete ***
 

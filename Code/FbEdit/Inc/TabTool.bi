@@ -77,7 +77,7 @@ Declare Sub SelectTabByWindow (ByVal hEdit As HWND)
 Declare Sub SelectTabByTabID (ByVal TabID As Integer)
 Declare Sub SelectTabByFileID (ByVal nInx As Integer)
 
-'Declare Sub TabToolInit ()
+Declare Sub TabToolInit ()
 Declare Function TabToolProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 
 

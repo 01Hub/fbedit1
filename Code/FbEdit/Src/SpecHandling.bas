@@ -451,7 +451,7 @@ Sub CmdLineCombinePath (ByRef CmdLine      As ZString,    _         ' [IN/OUT] r
 	TrimWhiteSpace CmdLine
     PathUnquoteSpaces CmdLine
     PathUnquoteSpaces DefaultPathLC
-    PathCombine CmdLine, @DefaultPathLC, CmdLine         ' PathCombine dont like quotes
+    PathCombine CmdLine, @DefaultPathLC, CmdLine        ' PathCombine dont like quotes
     PathQuoteSpaces CmdLine
 
 	If IsZStrNotEmpty (ArgList) Then
@@ -463,7 +463,7 @@ End Sub
 Sub WeedOutSpec (ByRef FileSpec As ZString)
 
     ' removes illegal chars from spec, removing is done inplace
-    ' [IN/OUT] FileSpec (has to be terminated by NULL)
+    ' [IN/OUT] FileSpec (has to be terminated by 0)
 
     Dim n As Integer = Any
     Dim i As Integer = Any
@@ -481,9 +481,95 @@ Sub WeedOutSpec (ByRef FileSpec As ZString)
                 i += 1
             EndIf
         Else
-            FileSpec[n] = NULL        ' terminating null
+            FileSpec[n] = 0           ' terminating null
             Exit Do
         EndIf
     Loop
 
+End Sub
+
+Sub PathWrap (ByVal pInSpec As ZString Ptr, ByVal pOutSpec As ZString Ptr, ByVal OutSpecSize As Integer, ByVal BlkMaxLen As Integer = 65)
+
+    Dim InSpecLen       As Integer = Any
+    Dim BlkStart        As Integer = Any
+    Dim BlkEnd          As Integer = Any
+    Dim WritePos        As Integer = Any
+    Dim WrapLen         As Integer = Any
+
+    Const WrapInsert    As String  = "..." + CR
+    Const WrapInsertLen As Integer = SizeOf(WrapInsert) - 1
+    Const Delimiter     As UByte   = Asc("\")
+
+    WritePos  = 0
+    BlkStart  = 0
+
+    If     pInSpec = NULL _
+    OrElse pOutSpec = NULL _
+    OrElse OutSpecSize = 0 Then    
+        Exit Sub 
+    EndIf
+
+    InSpecLen = lstrlen (pInSpec)
+    
+    If InSpecLen <= BlkMaxLen Then             ' nothing to do - skip wrapping
+        If InSpecLen < OutSpecSize Then        ' InSpecLen + term. Null <= OutSpecSize
+            *pOutSpec = *pInSpec
+        Else
+            SetZStrEmpty (pOutSpec)
+        EndIf
+        
+        Exit Sub                                
+    EndIf
+    
+    Do
+        BlkEnd = BlkStart + BlkMaxLen - 1
+
+        If BlkEnd >= InSpecLen Then BlkEnd = InSpecLen - 1
+        
+        If BlkEnd < InSpecLen - 1 Then
+            Do                                 ' do shrinking
+                If pInSpec[BlkEnd] = Delimiter Then
+                    Exit Do
+                EndIf
+                BlkEnd -= 1
+            Loop While BlkEnd > BlkStart
+        EndIf
+        
+        If BlkEnd = BlkStart Then              ' undo shrinking, delimiter not found
+            BlkEnd = BlkStart + BlkMaxLen - 1
+            If BlkEnd >= InSpecLen Then BlkEnd = InSpecLen - 1
+        EndIf
+        
+        WrapLen = BlkEnd - BlkStart + 1
+        
+        If WritePos + WrapLen < OutSpecSize Then
+            memcpy pOutSpec + WritePos, pInSpec + BlkStart, WrapLen
+            WritePos += WrapLen
+            BlkStart = BlkEnd + 1
+        Else     
+            SetZStrEmpty (pOutSpec)
+            Exit Sub 
+        EndIf
+        
+
+        If BlkStart < InSpecLen Then
+            If WritePos + WrapInsertLen < OutSpecSize Then
+                memcpy pOutSpec + WritePos, @WrapInsert, WrapInsertLen
+                WritePos += WrapInsertLen
+            Else     
+                SetZStrEmpty (pOutSpec)
+                Exit Sub 
+            EndIf        
+        Else
+            Exit Do
+        EndIf
+    Loop
+    
+    If WritePos < OutSpecSize Then
+        pOutSpec[WritePos] = 0                 ' append terminating 0
+    Else
+        SetZStrEmpty (pOutSpec)
+        Exit Sub 
+    EndIf
+    
 End Sub

@@ -420,7 +420,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
             DoToolbar ah.htoolbar, __FB_DEBUG__
 
             SbarInit
-            'TabToolInit
+            TabToolInit
 
             SetWindowLong ah.htabtool, GWL_ID, IDC_TABSELECT
             lpOldTabToolProc = Cast (WNDPROC, SetWindowLong (ah.htabtool, GWL_WNDPROC, Cast (Long, @TabToolProc)))
@@ -1808,7 +1808,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             ah.hrareseddlg = Cast (HWND, SendMessage (ah.hraresed, PRO_SHOWNAMES, 0, Cast (LPARAM, ah.hout)))
                             '
                         Case IDM_RESOURCE_EXPORT
-                            SendMessage(ah.hraresed,PRO_EXPORTNAMES,0,Cast(Integer,ah.hout))
+                            SendMessage ah.hraresed, PRO_EXPORTNAMES, 0, Cast(LPARAM, ah.hout)
                             '
                         Case IDM_RESOURCE_REMOVE
                             SendMessage(ah.hraresed,PRO_DELITEM,0,0)

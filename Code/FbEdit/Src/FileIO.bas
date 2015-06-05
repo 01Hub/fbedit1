@@ -101,6 +101,33 @@ Function GetFileMem OverLoad (Byval hEdit As HWND) As HGLOBAL
 
 End Function
 
+Function GetFileMemUsage (Byval hEdit As HWND) As Integer
+
+    Dim nlen As Integer  = Any
+    Dim hMem As HGLOBAL  = Any
+
+    If hEdit Then
+        If hEdit = ah.hres Then
+            hMem = GlobalAlloc (GMEM_FIXED, 256 * 1024)
+            If hMem Then
+                Cast (ZString Ptr, hMem)[0] = 0                              ' set content length zero
+                SendMessage ah.hraresed, PRO_EXPORT, 0, Cast(LPARAM, hMem)
+                nlen = lstrlen (Cast (ZString Ptr, hMem))
+                GlobalFree hMem
+                Return nlen
+            Else
+                Return 0
+            EndIf
+        Else
+            nlen = SendMessage (hEdit, WM_GETTEXTLENGTH, 0, 0)
+            Return nlen
+        EndIf
+    Else
+        Return 0
+    EndIf
+
+End Function
+
 Function GetFileMemSelected (Byval hEdit As HWND) As HGLOBAL
 
     Dim hMem As HGLOBAL   = Any

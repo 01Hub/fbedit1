@@ -23,6 +23,8 @@ Declare Sub GetLastWriteTime (ByVal pFileSpec As ZString Ptr, ByVal pFileTime As
 Declare Sub CmdLineSubstExeUI (ByRef CmdLine As ZString, ByVal hwndOwner As HWND, ByVal pFilterstring As ZString Ptr)
 Declare Sub CmdLineCombinePath (ByRef CmdLine As ZString, ByVal pDefaultPath As ZString Ptr)
 Declare Sub WeedOutSpec (ByRef FileSpec As ZString)
+Declare Sub PathWrap (ByVal pInSpec As ZString Ptr, ByVal pOutSpec As ZString Ptr, ByVal OutSpecSize As Integer, ByVal BlkMaxLen As Integer = 65)
+
 
 Declare Function FileExists (ByVal pSpec As ZString Ptr) As BOOL
 Declare Function DirExists (ByVal pSpec As ZString Ptr) As BOOL
