@@ -1807,68 +1807,13 @@ Sub UpdateAllTabs (ByVal nType As Integer)
 End Sub
 
 Sub  TabToolInit ()
-'    
-'    Print "TabToolInit"
-'    
 
     hToolTipWindow = CreateDialog (hInstance, MAKEINTRESOURCE (IDD_TABSELECT_INFO), NULL, NULL)    ' style: NOT visible
-
-
-'    Dim Balloon  As TOOLINFO 
-'    
-'    hToolTipWindow = Cast(HWND, SendMessage(ah.htabtool, TCM_GETTOOLTIPS,0,0))
-    
-    
-    
-    'If hToolTipWindow = NULL Then
-    'Dim iccex As INITCOMMONCONTROLSEX
-
-    'iccex.dwICC = ICC_WIN95_CLASSES
-    'iccex.dwSize = SizeOf (INITCOMMONCONTROLSEX)
-    'InitCommonControlsEx @iccex
-    
-    
-        'hToolTipWindow = CreateWindowEx (NULL, TOOLTIPS_CLASS, NULL, _
-        '                    WS_POPUP  Or TTS_ALWAYSTIP, _
-        '                    CW_USEDEFAULT, _
-        '                    CW_USEDEFAULT, _
-        '                    CW_USEDEFAULT, _
-        '                    CW_USEDEFAULT, _
-        '                    ah.htabtool, NULL, hInstance, NULL) 
-        ''SetWindowPos (hToolTipWindow, HWND_TOPMOST,0, 0, 0, 0, SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOACTIVATE)
-        'SendMessage hToolTipWindow, TTM_ACTIVATE, TRUE, 0 
-             
-        'Print "hToolTipWindow"; hToolTipWindow
-        'Print "hInstance"; hInstance
-        'Print "ah.htabtool"; ah.htabtool
-        'Print "ah.hwnd"; ah.hwnd
-       
-        'If hToolTipWindow = NULL Then Exit Sub
-     
-        'SendMessage hToolTipWindow, TTM_SETMAXTIPWIDTH, 0, 180 
-        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_INITIAL, 50 
-        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_RESHOW, 50
-        'SendMessage hToolTipWindow, TTM_SETDELAYTIME, TTDT_AUTOPOP, 10000
-    
-    'End If
-     
-    'With Balloon
-    '    .cbSize   = SizeOf (TOOLINFO) 
-    '    .uFlags   = TTF_IDISHWND Or TTF_SUBCLASS 
-    '    .hwnd     = NULL                  ' ignored if TTF_IDISHWD
-    '    .uId      = Cast (UINT_PTR, ah.htabtool) 
-    '    '.hinst    = hInstance
-    '    .lpszText = @"Test1" 
-    'End With
-    ' 
-    'SendMessage hToolTipWindow, TTM_SETTOOLINFO, 0, Cast (LPARAM, @Balloon)
-    'SendMessage hToolTipWindow, TTM_TRACKACTIVATE, TRUE, Cast (LPARAM, @Balloon)
 
 End Sub
 
 Sub TabToolTip (ByRef MousePos As POINT)
 
-	Dim ToolTipRECT        As RECT
 	Dim TextRECT           As RECT
 	Dim ToolTipDC          As HDC
     Dim ToolTipTXT(1 To 3) As ZString * 1024
@@ -1878,49 +1823,48 @@ Sub TabToolTip (ByRef MousePos As POINT)
 	Dim TextWidthMax       As Integer = Any
 	Dim TextHeightTotal    As Integer = Any
 	Dim TextHeight(1 To 3) As Integer = Any
-	Dim i                  As Integer = Any 
-	
+	Dim i                  As Integer = Any
+
 	ToolTipDC = GetDC (hToolTipWindow)
-	GetClientRect hToolTipWindow, @ToolTipRECT  
 	SelectObject ToolTipDC, ah.hToolFont
     SetBkColor ToolTipDC, GetSysColor (COLOR_BTNFACE)
     GetTextMetrics ToolTipDC, @ToolTipTM
     HalfLF = ToolTipTM.tmHeight \ 2
     IndentWidth = ToolTipTM.tmAveCharWidth * 2                                      ' indent = 2 chars
 
-    PathWrap @ad.filename, @ToolTipTXT(1), SizeOf (ToolTipTXT)                      ' text line 1    
+    PathWrap @ad.filename, @ToolTipTXT(1), SizeOf (ToolTipTXT)                      ' text line 1
 
-    If GetModifyFlag (ah.hred) = TRUE Then                                          ' text line 2    
+    If GetModifyFlag (ah.hred) = TRUE Then                                          ' text line 2
         ToolTipTXT(2) = "DirtyFlag: Modified"
     Else
         ToolTipTXT(2) = "DirtyFlag: Unmodified"
     EndIf
-	
+
     ToolTipTXT(3) = "FileSize: " + Str (GetFileMemUsage (ah.hred)) + " bytes"       ' text line 3
-	
+
 	TextWidthMax = 0                                                                ' calc printing area
 	TextHeightTotal = HalfLF
 	For i = 1 To 3
-	    DrawText ToolTipDC, @ToolTipTXT(i), -1, @ToolTipRECT, DT_CALCRECT
-	    If ToolTipRECT.right > TextWidthMax Then
-	        TextWidthMax = ToolTipRECT.right
+	    DrawText ToolTipDC, @ToolTipTXT(i), -1, @TextRECT, DT_CALCRECT
+	    If TextRECT.right > TextWidthMax Then
+	        TextWidthMax = TextRECT.right
 	    EndIf
-	    TextHeight(i) = ToolTipRECT.bottom
-	    TextHeightTotal += ToolTipRECT.bottom + HalfLF
+	    TextHeight(i) = TextRECT.bottom
+	    TextHeightTotal += TextRECT.bottom + HalfLF
 	Next
 	TextWidthMax += IndentWidth * 2                                                 ' indent left + indent right
-	
+
 	SetWindowPos (hToolTipWindow, HWND_TOPMOST, MousePos.x, MousePos.y + 15, TextWidthMax, TextHeightTotal, SWP_SHOWWINDOW)
-	
+
     TextRECT.left = IndentWidth
     TextRECT.top = HalfLF
     TextRECT.right = TextWidthMax
     TextRECT.bottom = TextHeightTotal
-    
+
     For i = 1 To 3                                                                  ' do printing
 	    DrawText ToolTipDC, @ToolTipTXT(i), -1, @TextRECT, DT_LEFT
         TextRECT.top += TextHeight(i) + HalfLF
-    Next 
+    Next
 
 	ReleaseDC hToolTipWindow, ToolTipDC
 
@@ -2035,6 +1979,11 @@ Function TabToolProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPAR
     '        EndIf
     '            
     '    #Undef lpNMTDI  
+	
+	'Case WM_CLOSE
+	'    Print "TabTool: WM_CLOSE"
+	'    Beep 
+	'    Sleep 1000
 	
 	End Select
 	Return CallWindowProc (lpOldTabToolProc, hWin, uMsg, wParam, lParam)

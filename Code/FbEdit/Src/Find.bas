@@ -787,6 +787,13 @@ Function Find (ByVal hWin As HWND, ByVal frType As Integer) As Integer
                     i = InStr (f.listoffiles, ",")
                     f.ffileno = Val (f.listoffiles)
                     f.listoffiles = Mid (f.listoffiles, i + 1)
+                    
+                    If GetTabIDByFileID(f.ffileno) = INVALID_TABID Then      ' actual not loaded
+                        LastLoadedFromProjectList = f.ffileno
+                    Else
+                        LastLoadedFromProjectList = 0
+                    EndIf
+                    
                     FileSpec = *GetProjectFileName (f.ffileno, PT_ABSOLUTE)
                     OpenTheFile FileSpec, FOM_BG
                     hEditor = GetEditWindowByFileID (f.ffileno)
@@ -800,7 +807,6 @@ Function Find (ByVal hWin As HWND, ByVal frType As Integer) As Integer
                     InitCharRange
                     f.fonlyonetime = 0
                     f.FoundAny = FALSE
-                    LastLoadedFromProjectList = f.ffileno
                 Else                    ' FOUND
                     If hEditor <> ah.hred Then
                         SelectTabByWindow hEditor
