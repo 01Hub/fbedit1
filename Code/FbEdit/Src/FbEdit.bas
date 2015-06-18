@@ -450,6 +450,12 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
             Next
 
             GetPrivateProfilePath "Win"        , "Path"         , @ad.IniFile, @szLastDir        , GPP_MustExist
+            If DirExists (@szLastDir) = FALSE Then
+                szLastDir = ad.AppPath
+                WritePrivateProfileString "Win", "Path", @szLastDir, @ad.IniFile
+                TextToOutput "*** defaulting last used path ***", MB_ICONHAND
+                TextToOutput "Replacement: " + szLastDir
+            EndIf
 
             GetPrivateProfilePath "EnvironPath", "PROJECTS_PATH", @ad.IniFile, @ad.DefProjectPath, GPP_MustExist
             If DirExists (@ad.DefProjectPath) = FALSE Then
