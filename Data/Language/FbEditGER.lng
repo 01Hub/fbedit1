@@ -251,14 +251,14 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 5515=Modul Handling
 5516=Modul Build Befehl:
 5517=Ausgabe-Dateiname:
-5518=Befehlszeilen Parameter ausführen:
+5518=Befehlszeilen Parameter Programmausführung:
 5519=Ressourcen Export Dateiname:
 5520=Projekt Dateigruppe
 5521=Nur veränderte Dateien neu kompilieren
 5522=Modul Dateien zum Build-Befehl hinzufügen
 5523=Versionsnummer vor dem Build erhöhen
 5525=Automatisches Löschen von Dateien nach dem Build (*.obj ; *.a):
-5526=In Shell ausführen (cmd.exe)
+5526=Shell nach Programmende nicht schliessen
 ;--------------------------------------------------------------------------
 [5600]
 1=OK
@@ -316,6 +316,13 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 ;--------------------------------------------------------------------------
 [6500]
 1006=Zum Einfügen ein Fenster doppelclicken
+;--------------------------------------------------------------------------
+[6600]
+6600=Ausführungsoptionen für Nicht-Projekt-Module
+6601=Befehlszeilen Parameter Programmausführung:
+6603=Shell nach Programmende nicht schliessen
+1=Ok
+2=Abbrechen
 ;--------------------------------------------------------------------------
 [10000]
 10001=&Datei
@@ -462,6 +469,7 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 10164=&Pfad Optionen
 10165=Deb&ug/Schnellstart Optionen
 10166=&Build Optionen
+10167=&Exec Optionen 
 10168=&Addin Manager
 10169=&Werkzeug Menü
 10170=&Hilfe Menü

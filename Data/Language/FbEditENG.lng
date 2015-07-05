@@ -259,7 +259,7 @@ Lang=English (default), By FbEdit team
 5531=Post-Build Batch:
 5525=Auto delete files after build (*.obj ; *.a):
 5518=Run Command line parameter:
-5526=Start cmd.exe
+5526=Keep shell on exit
 5520=Project File Grouping
 5501=None
 5502=By Folder
@@ -325,6 +325,13 @@ Lang=English (default), By FbEdit team
 [6500]
 6500=Clipboard History
 1006=Doubleclick a Pane to Paste
+;--------------------------------------------------------------------------
+[6600]
+6600=Non Project Run Option
+6601=Command line parameters for executable:
+6603=Keep shell on exit
+1=Ok
+2=Cancel
 ;--------------------------------------------------------------------------
 [10000]
 10001=&File
@@ -469,6 +476,7 @@ Lang=English (default), By FbEdit team
 10163=&Dialog Editor
 10165=Deb&ug / &Quick run Option
 10166=&Build Options
+10167=&Run Options 
 10168=&Addin Manager
 10035=En&vironment
 10169=&Tools Menu

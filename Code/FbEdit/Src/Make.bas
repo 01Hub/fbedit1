@@ -15,6 +15,7 @@
 #Include Once "Inc\GUIHandling.bi"
 #Include Once "Inc\IniFile.bi"
 #Include Once "Inc\Misc.bi"
+#Include Once "Inc\NonProjRunOpt.bi"
 #Include Once "Inc\Project.bi"
 #Include Once "Inc\Resource.bi"
 #Include Once "Inc\SpecHandling.bi"
@@ -287,12 +288,21 @@ Sub MakeRun (ByRef FileSpec As ZString)
         PathRenameExtension @ExeSpec, @".exe"
         ExeSpec = QUOTE + ExeSpec + QUOTE
     	
-    	If fRunCmd Then
-    		ParamLine = "/k " + ExeSpec + " " + ad.smakerun
-    		ShellExecuteUI NULL, NULL, @"cmd.exe", @ParamLine, NULL, SW_SHOWNORMAL
+    	If fProject Then
+        	If fRunCmd Then
+        		ParamLine = "/s /k " + QUOTE + ExeSpec + " " + ad.smakerun + QUOTE        ' /s removes first and last quote and leaves remaining untouched
+        		ShellExecuteUI NULL, NULL, @"cmd.exe", @ParamLine, NULL, SW_SHOWNORMAL
+        	Else
+        		ShellExecuteUI NULL, NULL, @ExeSpec, @ad.smakerun, NULL, SW_SHOWNORMAL
+        	EndIf
     	Else
-    		ShellExecuteUI NULL, NULL, @ExeSpec, @ad.smakerun, NULL, SW_SHOWNORMAL
-    	EndIf
+        	If NonProjKeepShell Then
+        		ParamLine = "/s /k " + QUOTE + ExeSpec + " " + NonProjCmdLineParam + QUOTE
+        		ShellExecuteUI NULL, NULL, @"cmd.exe", @ParamLine, NULL, SW_SHOWNORMAL
+        	Else
+        		ShellExecuteUI NULL, NULL, @ExeSpec, @NonProjCmdLineParam, NULL, SW_SHOWNORMAL
+        	EndIf
+    	EndIf     
     Else
         TextToOutput "*** error execute ***", MB_ICONHAND
         TextToOutput "empty filespec"
@@ -308,8 +318,12 @@ Sub MakeRunDebug (ByRef DebuggeeSpec As ZString)
     If IsZStrNotEmpty (DebuggeeSpec) Then
 	    GetFullPathName @DebuggeeSpec, MAX_PATH, @ParamLine, NULL
         PathRenameExtension @ParamLine, @".exe"
-        ParamLine = QUOTE + ParamLine + QUOTE + " " + ad.smakerun   ' debuggee + commandline parameters
-
+        If fProject Then
+            ParamLine = QUOTE + ParamLine + QUOTE + " " + ad.smakerun   ' debuggee + commandline parameters
+        Else
+            ParamLine = QUOTE + ParamLine + QUOTE + " " + NonProjCmdLineParam
+        EndIf
+        
         If IsZStrNotEmpty (ad.smakerundebug) Then
             DebuggerSpec = ad.smakerundebug
             Success = ExpandStrByEnviron (DebuggerSpec, SizeOf (DebuggerSpec))

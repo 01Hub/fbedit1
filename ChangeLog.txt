@@ -158,7 +158,13 @@ FbEditMOD 1.0.7.8
      - tab control
         left mouse button (click and hold) shows a tooltip window containing some information about this tab    
 
-
+     - [Options]->[Run Options]
+        new dialog with options for execution (for non-project-files only)
+        options for execution of project files comes from [Project]->[Project options] as usual
+        quoting of parameters containing spaces is allowed now
+        
+        
+        
 
       *** incomplete ***
 

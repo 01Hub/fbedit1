@@ -2500,6 +2500,7 @@ Function ProjectOptionDlgProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wPa
 					GetDlgItemText hWin, IDC_EDTOUTFILE, @sItem, SizeOf (sItem)
 					WritePrivateProfileString @"Make", @"Output", @sItem, @ad.ProjectFile
 					GetDlgItemText hWin, IDC_EDTRUN, @sItem, SizeOf (sItem)
+					sItem = QUOTE + sItem + QUOTE                               ' preserve quotes if existing, subsequential profile reading will remove first level of quotes
 					WritePrivateProfileString @"Make", @"Run", @sItem, @ad.ProjectFile
 					GetDlgItemText hWin,IDC_EDTDELETE, @sItem, SizeOf (sItem)
 					WritePrivateProfileString @"Make", @"Delete", @sItem, @ad.ProjectFile

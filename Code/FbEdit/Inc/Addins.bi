@@ -185,7 +185,7 @@ Type ADDINDATA
 	lpFBCOLOR		As FBCOLOR Ptr					' Colors
 	smake			As ZString*260					' Make compile command
 	smakemodule		As ZString*260					' *** NOT USED ***    Make compile module command
-	smakeoutput		As ZString*260					' Make output filename
+	smakeoutput		As ZString*260					' Make otput filename
 	smakerun		As ZString*260					' Run command line parameters
 	smakerundebug	As ZString*260					' External debugger
 	filename		As ZString*260					' Current open file

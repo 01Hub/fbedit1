@@ -737,7 +737,16 @@ Sub KeepChars (ByRef Source As ZString, ByRef CharList As ZString)
 End Sub
 
 Function EncloseString (ByRef Source As ZString, ByVal SourceSize As Integer, ByVal EncloseChar As UByte) As BOOL
-
+    
+    ' enclosing a string with a single char
+    ' enclosing is done inplace
+    ' if source string is enclosed already, nothing will be done
+    ' i.e.   source          enclosechar          result
+    '        xyz             *                    *xyz*
+    '        *xyz            *                    *xyz*
+    '        xyz*            *                    *xyz* 
+    '
+    
     Dim L As Integer = Any
 
     L = lstrlen (@Source)

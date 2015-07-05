@@ -52,6 +52,7 @@
 #Include Once "Inc\LineQueue.bi"
 #Include Once "Inc\Make.bi"
 #Include Once "Inc\Misc.bi"
+#Include Once "Inc\NonProjRunOpt.bi"
 #Include Once "Inc\Project.bi"
 #Include Once "Inc\Property.bi"
 #Include Once "Inc\ResEd.bi"
@@ -490,6 +491,8 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
             GetPrivateProfileString @"Debug", @"Debug", NULL, @ad.smakerundebug, SizeOf (ad.smakerundebug), @ad.IniFile
             GetPrivateProfileString @"Edit", @"CaseConvert", @"CWPp", @szCaseConvert, SizeOf (szCaseConvert), @ad.IniFile
             FindReadIni
+            
+            NonProjRunOptInit
 
             ' Create fonts
             LoadFromIni "Edit", "EditFont", "44044", @edtfnt, FALSE
@@ -1847,10 +1850,12 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             '
                         Case IDM_MAKE_RUN
                             fQR = FALSE
-                            If IsZStrNotEmpty (ad.smakeoutput) Then
-                                sFile = ad.smakeoutput                                 ' MOD sFile = ad.ProjectPath & "\" & ad.smakeoutput
-                            ElseIf fProject Then
-                                sFile = *GetProjectFileName (nMain, PT_RELATIVE)	   ' MOD sFile=GetProjectFile(GetPrivateProfileInt(StrPtr("File"),StrPtr("Main"),1,ad.ProjectFile))
+                            If fProject Then
+                                If IsZStrNotEmpty (ad.smakeoutput) Then
+                                    sFile = ad.smakeoutput                             ' MOD sFile = ad.ProjectPath & "\" & ad.smakeoutput
+                                Else
+                                    sFile = *GetProjectFileName (nMain, PT_RELATIVE)   ' MOD sFile=GetProjectFile(GetPrivateProfileInt(StrPtr("File"),StrPtr("Main"),1,ad.ProjectFile))
+                                End If 
                             Else
                                 sFile = ad.filename
                             EndIf
@@ -1858,10 +1863,12 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             '
                         Case IDM_MAKE_RUNDEBUG
                             fQR = FALSE
-                            If IsZStrNotEmpty (ad.smakeoutput) Then
-                                sFile = ad.smakeoutput
-                            ElseIf fProject Then
-                                sFile = *GetProjectFileName (nMain, PT_RELATIVE)	   ' MOD sFile=GetProjectFile(GetPrivateProfileInt(StrPtr("File"),StrPtr("Main"),1,ad.ProjectFile))
+                            If fProject Then
+                                If IsZStrNotEmpty (ad.smakeoutput) Then
+                                    sFile = ad.smakeoutput                             ' MOD sFile = ad.ProjectPath & "\" & ad.smakeoutput
+                                Else
+                                    sFile = *GetProjectFileName (nMain, PT_RELATIVE)   ' MOD sFile=GetProjectFile(GetPrivateProfileInt(StrPtr("File"),StrPtr("Main"),1,ad.ProjectFile))
+                                End If 
                             Else
                                 sFile = ad.filename
                             EndIf
@@ -1961,8 +1968,8 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                         Case IDM_OPTIONS_DIALOG
                             DialogBox (hInstance, MAKEINTRESOURCE (IDD_DLG_RESEDOPTION), hWin, @TabOptionsProc)
                             '
-                        'Case IDM_OPTIONS_PATH
-                            'DialogBox(hInstance,Cast(ZString Ptr,IDD_DLGPATHOPTION),hWin,@PathOptDlgProc)
+                        Case IDM_OPTIONS_NONPROJRUN
+                            DialogBox (hInstance, MAKEINTRESOURCE (IDD_DLG_NONPROJRUNOPTION), hWin, @NonProjRunOptDlgProc)
                             '
                         Case IDM_OPTIONS_DEBUG
                             DialogBox (hInstance, MAKEINTRESOURCE (IDD_DLG_DEBUGOPTION), hWin, @DebugOptDlgProc)
