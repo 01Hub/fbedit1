@@ -2051,6 +2051,8 @@ ResEdProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 				invoke SetWindowPos,hTabSet,HWND_TOP,0,0,0,0,SWP_NOACTIVATE or SWP_SHOWWINDOW or SWP_NOMOVE or SWP_NOSIZE
 				invoke UpdateWindow,hDEd
 			.endif
+			mov		eax, hTabSet                              ; *** MOD
+			jmp		Ex                                        ; *** MOD
 		.endif
 	.elseif eax==DEM_EXPORTDLG
 		invoke GetWindowLong,hDEd,DEWM_MEMORY

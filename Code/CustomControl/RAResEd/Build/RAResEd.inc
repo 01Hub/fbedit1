@@ -161,7 +161,7 @@ DEM_ADDCONTROL		equ DEM_BASE+23		;wParam=0, lParam=lpCCDEF
 DEM_GETCOLOR		equ DEM_BASE+24		;wParam=0, lParam=lpCOLOR
 DEM_SETCOLOR		equ DEM_BASE+25		;wParam=0, lParam=lpCOLOR
 DEM_SHOWDIALOG		equ DEM_BASE+26		;wParam=0, lParam=0
-DEM_SHOWTABINDEX	equ DEM_BASE+27		;wParam=0, lParam=0
+DEM_SHOWTABINDEX	equ DEM_BASE+27		;wParam=0, lParam=0, Returns HWND of TabIndex-window-layer, 0 if layer off
 DEM_EXPORTDLG		equ DEM_BASE+28		;wParam=0, lParam=lpszFileName
 DEM_AUTOID			equ DEM_BASE+29		;wParam=0, lParam=0
 DEM_GETBUTTONSCOUNT	equ DEM_BASE+30		;wParam=0, lParam=0

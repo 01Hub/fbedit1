@@ -162,6 +162,7 @@ xcopy /F /Y "%CD%\Data\Api\*.*" "%CD%\Build\Api\*" >> Collect.log || goto ERR_Ex
 :: ###############################################
 
 echo .
+echo *** get Tools Files ***
 xcopy /F /Y "%CD%\Code\Tools\FbEditLNG\Build\FbEditLNG.exe" "%CD%\Build\Tools\*" >> Collect.log || goto ERR_Exit
 xcopy /F /Y "%CD%\Code\Tools\FbEditLNG\Build\Addins.lng" "%CD%\Build\Tools\*" >> Collect.log || goto ERR_Exit
 xcopy /F /Y "%CD%\Code\Tools\MakeApi\Build\MakeApi.exe" "%CD%\Build\Tools\*" >> Collect.log || goto ERR_Exit

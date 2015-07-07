@@ -1553,8 +1553,13 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             SendMessage(ah.hraresed,DEM_ALIGNSIZE,0,ALIGN_DLGVCENTER)
                             '
                         Case IDM_FORMAT_TAB
-                            SendMessage(ah.hraresed,DEM_SHOWTABINDEX,0,0)
-                            '
+                            hCtl = Cast(HWND, SendMessage (ah.hraresed, DEM_SHOWTABINDEX, 0, 0))
+                            If hCtl Then
+                                CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_CHECKED
+                            Else
+                                CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_UNCHECKED
+                            EndIf
+                            
                         Case IDM_FORMAT_RENUM
                             SendMessage(ah.hraresed,DEM_AUTOID,0,0)
                             '

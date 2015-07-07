@@ -122,7 +122,7 @@ End Type
 #Define DEM_BASE					WM_USER+2000
 #Define DEM_OPEN					DEM_BASE+1		' 0,hMem:HGLOBAL
 #Define DEM_DELETECONTROLS		    DEM_BASE+2		' 0,0
-#Define DEM_CANUNDO	    			DEM_BASE+3		' ,0,0|BOOLEAN
+#Define DEM_CANUNDO	    			DEM_BASE+3		' 0,0|BOOLEAN
 #Define DEM_UNDO					DEM_BASE+4		' 0,0
 #Define DEM_CUT			    		DEM_BASE+5		' 0,0
 #Define DEM_COPY					DEM_BASE+6		' 0,0
@@ -146,7 +146,7 @@ End Type
 #Define DEM_GETCOLOR				DEM_BASE+24		' 0,lpRARESEDCOLOR:RARESEDCOLOR Ptr
 #Define DEM_SETCOLOR				DEM_BASE+25		' 0,lpRARESEDCOLOR:RARESEDCOLOR Ptr
 #Define DEM_SHOWDIALOG  			DEM_BASE+26		' 0,0
-#Define DEM_SHOWTABINDEX    		DEM_BASE+27		' 0,0
+#Define DEM_SHOWTABINDEX    		DEM_BASE+27		' 0,0|hwnd of TabIndex-window-layer, 0 if layer off
 #Define DEM_EXPORTDLG		    	DEM_BASE+28		' 0,lpszFileName:ZString Ptr
 #Define DEM_AUTOID				    DEM_BASE+29		' 0,0
 #Define DEM_GETBUTTONSCOUNT	        DEM_BASE+30		' 0,0

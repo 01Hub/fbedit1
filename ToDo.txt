@@ -108,8 +108,6 @@
 
     - neue Menüpunkte  [Make]->[Link only]
                        [TabTool-context]->[compile this module]  (nur für Projekte, auch für .RC)
-                       [Make]->[Run in console] (check-mark)  
-                       [Project]->[Project options] "Run in console" entfernen
                        
      - Unterstützung von "Multiple-Toolchain" (%PATH%-Extensions erforderlich für msys2-mingw64/mingw32)
      

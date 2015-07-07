@@ -163,8 +163,13 @@ FbEditMOD 1.0.7.8
         options for execution of project files comes from [Project]->[Project options] as usual
         quoting of parameters containing spaces is allowed now
         
-        
-        
+     - ResEdit's message DEM_SHOWTABINDEX returns HWND of TabIndex-layer-window
+       (returns zero if layer off)   
+     
+     - Context menu ResEdit
+       [Set TabIndex] has a check mark if TabIndex-layer-window is shown.
+       Now perhaps its clearer howto hide again TabIndex-layer-window  
+           
 
       *** incomplete ***
 

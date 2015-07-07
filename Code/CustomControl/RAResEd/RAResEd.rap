@@ -151,24 +151,24 @@ Options=52
 16=,107,0,Res\Lock.bmp
 
 [Size]
-5=0,0,0,0,9765
+5=0,0,0,0,9501
 3=0,0,0,0,582
 4=0,0,0,0,36
 <<<<<<< .mine
-1=0,0,718,485,37044
-7=0,0,718,485,76351
+1=0,0,718,485,50150
+7=0,0,718,485,83465
 6=0,0,0,0,12169
-9=0,0,718,485,89186
+9=0,0,718,485,100526
 =======
 1=0,0,718,485,38202
 7=0,0,718,485,76351
 6=0,0,0,0,4081
 9=0,0,718,485,85584
 >>>>>>> .r52
-2=0,0,584,498,4006
+2=0,0,584,498,446
 <<<<<<< .mine
 8=0,0,0,0,4685
-10=0,0,0,0,7449
+10=0,0,0,0,2715
 16=0,0,718,485,18551
 =======
 8=0,0,0,0,4685
@@ -176,7 +176,7 @@ Options=52
 16=0,0,718,485,13788
 >>>>>>> .r52
 15=0,0,0,0
-17=0,0,0,0,55440
+17=0,0,0,0,45164
 18=0,0,0,0,15779
 21=0,0,0,0,16775
 23=0,0,0,0
@@ -210,26 +210,26 @@ Options=52
 48=0,0,0,0
 49=0,0,0,0
 50=0,0,0,0
-51=0,0,0,0,13682
+51=0,0,0,0,2586
 52=0,0,0,0,4114
 53=
 
 
 [Find]
-1="ExportProject"
-2="ExportDialog"
-3="DEM_EXPORTTORC"
-4="DEM_COMPACT"
-5="SaveExStyle"
-6="saveex"
-7="SaveHexVal"
-8="','"
-9="GetProjectItemName"
-10="SetProjectItemName"
+1="DEM_SHOWTABINDEX"
+2="hTabSet"
+3="*** mod"
+4="nTabSet"
+5="charset"
+6="ExportProject"
+7="ExportDialog"
+8="DEM_EXPORTTORC"
+9="DEM_COMPACT"
+10="SaveExStyle"
 >>>>>>> .r52
 
 [AutoLoad]
-AutoLoad=1,51,10,18,39,2,9
+AutoLoad=1,51,10,18,39,2,9,5,7,17
 >>>>>>> .r52
 [VerInf]
 Nme=VERINF1
@@ -276,7 +276,7 @@ MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
 <<<<<<< .mine
-MilestoneOnDateDate=5
+MilestoneOnDateDate=6
 =======
 MilestoneOnDateDate=30
 >>>>>>> .r52
@@ -379,7 +379,7 @@ Group=Assembly,Resources,Misc,Include
 51=,,
 [PTimer]
 <<<<<<< .mine
-PTimer=1665895726
+PTimer=1667576138
 =======
 PTimer=1647308128
 >>>>>>> .r52
@@ -401,6 +401,7 @@ PTimer=1647308128
 18=
 7=
 51=
+2=
 [GroupExpand]
 GroupExpand=1,1,1,1,0
 [Exports]
