@@ -55,6 +55,7 @@ echo 1 ...
 "%FBHome%\FBC.EXE" %BFLAGS_MODULE_GENGAS% "Src\HexEd.bas"            >> make.log || goto ERR_Exit
 "%FBHome%\FBC.EXE" %BFLAGS_MODULE_GENGAS% "Src\FileMonitor.bas"      >> make.log || goto ERR_Exit
 "%FBHome%\FBC.EXE" %BFLAGS_MODULE_GENGAS% "Src\Statusbar.bas"        >> make.log || goto ERR_Exit
+"%FBHome%\FBC.EXE" %BFLAGS_MODULE_GENGAS% "Src\NonProjRunOpt.bas"    >> make.log || goto ERR_Exit
 
 
 
@@ -98,6 +99,7 @@ echo *** compiling main ***
                                   "Src\HexEd.o"             ^
                                   "Src\FileMonitor.o"       ^
                                   "Src\Statusbar.o"         ^
+                                  "Src\NonProjRunOpt.o"     ^
                                   -x "Build\FbEdit.exe" >> make.log || goto ERR_Exit
 
 
