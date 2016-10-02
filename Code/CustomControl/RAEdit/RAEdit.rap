@@ -103,7 +103,7 @@ CompanyName=
 8=IDB_LOCK,107,0,Res\Lock.bmp
 
 [Size]
-1=0,0,0,0,44212
+1=0,0,0,0,4194
 16=0,666,210,222,6193
 22=0,222,210,222,4169
 23=210,222,210,222,7195
@@ -113,7 +113,7 @@ CompanyName=
 9=0,444,210,222,10183
 10=630,666,210,222,40604
 11=210,444,210,222,11340
-20=630,222,210,222,3058
+20=630,222,210,222,3633
 15=840,444,210,222,10752
 18=420,444,210,222,3824
 4=630,0,210,222,8
@@ -152,7 +152,7 @@ CompanyName=
 10="xSetCursor"
 
 [AutoLoad]
-AutoLoad=1,22,9,16,19,13,10,15,21,2,14,23,24,18
+AutoLoad=1,22,9,16,19,13,10,15,21,2,14,23,24,18,20,4
 
 [Version-Inc]
 Options=52
@@ -191,7 +191,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=23
+MilestoneOnDateDate=18
 MilestoneOnDateTimeYear=2006
 MilestoneOnDateTimeMonth=8
 MilestoneOnDateTimeDate=27
@@ -253,7 +253,7 @@ Group=Assembly,Resources,Misc
 3=
 
 [PTimer]
-PTimer=1339102387
+PTimer=1416200893
 
 [RADebugBP]
 16=

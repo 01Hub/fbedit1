@@ -26,7 +26,7 @@ Declare Sub CaseConvertWord (ByVal hWin As HWND,ByVal cp As Integer)
 Declare Sub AutoBrace (ByVal hWin As HWND, ByVal nChr As Integer)
 Declare Function AutoFormatLine (ByVal hWin As HWND, ByVal lpchrg As CHARRANGE Ptr) As Integer
 Declare Sub TrimTrailingSpaces ()
-Declare Sub IndentComment (Byref char As zString,ByVal fUn As Boolean)
+Declare Sub IndentComment (Byref char As zString,ByVal fUn As WINBOOLEAN)
 Declare Sub BlockModeToggle (ByVal hEditor As HWND = ah.hred)
 
 Declare Sub GetLineByNo (ByVal hWin As HWND, ByVal LineNo As Integer, Byval pBuff As ZString Ptr)

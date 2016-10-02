@@ -16,7 +16,6 @@
 #Include Once "win\shellapi.bi"
 #Include Once "win\shlwapi.bi"
 
-#Define __crt_string_bi__
 #Include Once "tre\regex.bi"                                                 ' MOD 16.2.2012
 
 #Include Once "Inc\RAEdit.bi"
@@ -371,7 +370,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
     Dim LineNo   As LRESULT            = Any
 
     Static mnuid As Integer            = 21000
-    Static fQR   As BOOLEAN
+    Static fQR   As WINBOOLEAN
     Static nSize As Integer
     Static hVCur As HCURSOR
     Static hHCur As HCURSOR
@@ -1553,12 +1552,7 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             SendMessage(ah.hraresed,DEM_ALIGNSIZE,0,ALIGN_DLGVCENTER)
                             '
                         Case IDM_FORMAT_TAB
-                            hCtl = Cast(HWND, SendMessage (ah.hraresed, DEM_SHOWTABINDEX, 0, 0))
-                            If hCtl Then
-                                CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_CHECKED
-                            Else
-                                CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_UNCHECKED
-                            EndIf
+                            TabIndexWindow = Cast(HWND, SendMessage (ah.hraresed, DEM_SHOWTABINDEX, 0, 0))
                             
                         Case IDM_FORMAT_RENUM
                             SendMessage(ah.hraresed,DEM_AUTOID,0,0)
@@ -1703,18 +1697,22 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             '
                         Case IDM_VIEW_FULLSCREEN
                             If ah.hfullscreen Then
-                                hMnu = GetSubMenu (GetMenu (ah.hwnd), 1)
+                                hMnu = GetSubMenu (ah.hmenu, 1)
                                 DeleteMenu hMnu, IDM_VIEW_FULLSCREEN, MF_BYCOMMAND
-                                DestroyWindow(ah.hfullscreen)
-                                SendMessage(hWin,WM_SIZE,SIZE_RESTORED,0)
+                                hMnu = GetSubMenu (ah.hcontextmenu, 4)
+                                DeleteMenu hMnu, IDM_VIEW_FULLSCREEN, MF_BYCOMMAND
+                                DestroyWindow ah.hfullscreen
+                                SendMessage hWin, WM_SIZE, SIZE_RESTORED, 0
                             Else
-                                ah.hfullscreen=CreateWindowEx(NULL,@szFullScreenClassName,NULL,WS_POPUP Or WS_VISIBLE Or WS_MAXIMIZE,0,0,0,0,hWin,NULL,hInstance,NULL)
-                                SetFullScreen(ah.hred)
-                                hMnu = GetSubMenu (GetMenu (ah.hwnd), 1)
+                                ah.hfullscreen = CreateWindowEx (NULL, @szFullScreenClassName, NULL, WS_POPUP Or WS_VISIBLE Or WS_MAXIMIZE, 0, 0, 0, 0, hWin, NULL, hInstance, NULL)
+                                SetFullScreen ah.hred
                                 buff = GetInternalString (IS_EXITFULLSCREEN)
+                                hMnu = GetSubMenu (ah.hmenu, 1)
+                                AppendMenu hMnu, MF_STRING, IDM_VIEW_FULLSCREEN, @buff
+                                hMnu = GetSubMenu (ah.hcontextmenu, 4)
                                 AppendMenu hMnu, MF_STRING, IDM_VIEW_FULLSCREEN, @buff
                             EndIf
-                            '
+
                         Case IDM_VIEW_DUALPANE
                             If ah.hpane(0) Then
                                 If ah.hpane(1) Then
@@ -2113,7 +2111,20 @@ Function MainDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
                             CreateProcess NULL, buff, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, @SInfo, @PInfo
                             CloseHandle PInfo.hProcess
                             CloseHandle PInfo.hThread
+
+                        Case IDM_WINDOW_SHELL_HERE
+                            UpdateEnvironment
+
+                            Dim SInfo  As STARTUPINFO
+                            Dim PInfo  As PROCESS_INFORMATION
                             
+                            FileSpec = ad.filename
+                            PathRemoveFileSpec @FileSpec
+                            buff = "cmd.exe /K cd " + QUOTE + FileSpec + QUOTE
+                            CreateProcess NULL, buff, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, @SInfo, @PInfo
+                            CloseHandle PInfo.hProcess
+                            CloseHandle PInfo.hThread
+    
                         Case IDM_OUTPUT_CLEAR
                             SendMessage ah.hout, WM_SETTEXT, 0, Cast (LPARAM, @"")
                             UpdateAllTabs (6)          ' clear all bookmarks
@@ -3170,7 +3181,7 @@ End Function
     hInstance = GetModuleHandle (NULL)
     hRichEditDll = LoadLibrary ("riched20.dll")
 
-    ad.lpCharTab   = GetCharTabPtr ()
+    ad.lpCharTab   = RAEdit_GetCharTabPtr ()
     ad.lpszVersion = @"FreeBASIC editor 1.0.7.8 - SVN Rev " SVN_REV
     ad.version     = 1078
     ad.lpBuff      = @buff

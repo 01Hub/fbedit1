@@ -1,7 +1,7 @@
 Dim Shared hLngDlg As HWND
 Dim Shared dlgID As Integer
 
-Function DumpEnumProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As Boolean
+Function DumpEnumProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As WINBOOLEAN
 	Dim buff As ZString*256
 	Dim nInx As Integer
 	Dim szID As ZString*256
@@ -70,7 +70,7 @@ Function DumpDlgProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
 
 End Function
 
-Function DlgTranslateProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As Boolean
+Function DlgTranslateProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As WINBOOLEAN
 	Dim buff As ZString*256
 	Dim id As Integer
 

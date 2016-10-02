@@ -1,40 +1,14 @@
 
 @echo off
 
-call:GetIniValue "..\..\Make.ini" "MasmHome" MasmHome
+call:GetIniValue "..\..\Make.ini" "FBHome" FBHome
 
-
-set MasmBin=%MasmHome%\Bin
-set MasmInc=%MasmHome%\Include
-set MasmLib=%MasmHome%\Lib
 
 
 echo .
-echo *** compiling RC ***
-"%MasmBin%\RC.EXE" /v /fo"FbEditDLL.res" Src\FbEditDLL.rc > make.log || goto ERR_Exit
+echo *** compiling ***
+"%FBHome%\FBC.EXE" -v -dll -Wl "--entry _DLLMAIN@12" "Src\FbEditDLL.bas" "Src\FbEditDLL.rc" -x "Build\FbEdit.dll" > make.log || goto ERR_Exit
 
-
-echo .
-echo *** compiling ASMs ***
-"%MasmBin%\ML.EXE" /c /coff /Cp /I"%MasmInc%" "Src\FbEditDLL.asm" >> make.log || goto ERR_Exit
-
-
-echo .
-echo *** linking DLL ***
-set LIB="%MasmLib%";"..\VKDebug\Build"
-"%MasmBin%\LINK.EXE" /verbose /SUBSYSTEM:WINDOWS /RELEASE /DLL /DEF:"Src\FbEditDLL.def" /OUT:"Build\FbEdit.dll" FbEditDLL.obj FbEditDLL.res >> make.log || goto ERR_Exit
-move Build\FbEdit.lib Build\libFbEdit.dll.a || goto ERR_Exit
-
-
-echo .
-echo *** exhibit INC ***
-xcopy Src\FbEditDLL.inc Build /d /y || goto ERR_Exit
-
-
-echo .
-echo *** cleanup ***
-del FbEditDLL.obj || goto ERR_Exit
-del FbEditDLL.res || goto ERR_Exit
 
 
 :OK_Exit

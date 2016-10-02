@@ -208,15 +208,15 @@ End Type
 
 Type ADDINFUNCTIONS
 	TextToOutput         As Sub      (ByVal sText As ZString Ptr)
-	SaveToIni            As Sub      (ByVal lpszApp As ZString Ptr, ByVal lpszKey As ZString Ptr, ByRef lpszTypes As ZString, ByVal lpDta As Any Ptr, ByVal fProject As Boolean)
-	LoadFromIni          As Function (ByVal lpszApp As ZString Ptr, ByVal lpszKey As ZString Ptr, ByRef szTypes As zString, ByVal lpDta As Any Ptr, ByVal fProject As Boolean) As Boolean
+	SaveToIni            As Sub      (ByVal lpszApp As ZString Ptr, ByVal lpszKey As ZString Ptr, ByRef lpszTypes As ZString, ByVal lpDta As Any Ptr, ByVal fProject As WINBOOLEAN)
+	LoadFromIni          As Function (ByVal lpszApp As ZString Ptr, ByVal lpszKey As ZString Ptr, ByRef szTypes As zString, ByVal lpDta As Any Ptr, ByVal fProject As WINBOOLEAN) As WINBOOLEAN
 	OpenTheFile          As Sub      (ByRef FileSpec As ZString, ByVal OpenMode As FileOpenMode)
 	Compile              As Function (ByRef sMake As ZString) As Integer
-	ShowOutput           As Sub      (ByVal bShow As Boolean)
+	ShowOutput           As Sub      (ByVal bShow As WINBOOLEAN)
 	TranslateAddinDialog As Sub      (ByVal hWin As HWND, ByRef sID As ZString)
 	FindString           As Function (ByVal hMem As HGLOBAL, ByRef szApp As ZString, ByRef szKey As ZString) As String
 	CallAddins           As Function (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal WPARAM As WPARAM, ByVal LPARAM As LPARAM, ByVal hook1 As UINT) As Integer
-	ShowImmediate        As Sub      (ByVal bShow As Boolean)
+	ShowImmediate        As Sub      (ByVal bShow As WINBOOLEAN)
 	MakeProjectFileName  As Function (ByRef sFile As Const ZString) As String
 	HH_Help              As Sub      ()
 	GetFileID            As Function (Byref sFile As ZString) As Integer

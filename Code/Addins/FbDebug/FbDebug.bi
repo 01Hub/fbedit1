@@ -26,7 +26,7 @@
 #Define PRM_FINDNEXT							WM_USER+14		' wParam=0, lParam=0
 
 Declare Sub EnableDebugMenu
-Declare Sub LockFiles(ByVal bLock As Boolean)
+Declare Sub LockFiles(ByVal bLock As WINBOOLEAN)
 Declare Sub GetBreakPoints
 Declare Function GetFileID(ByVal lpFile As ZString Ptr) As Integer
 

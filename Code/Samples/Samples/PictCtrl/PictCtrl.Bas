@@ -78,7 +78,7 @@ Function LoadPict(ByVal szPict As String) As HBITMAP
 	Dim hGlobal As HGLOBAL
 	Dim pvData As HGLOBAL
 	Dim dwBytesRead As Integer
-	Dim bRead As Boolean
+	Dim bRead As WINBOOLEAN
 	Dim hr As HRESULT
 
 	If hBmp Then

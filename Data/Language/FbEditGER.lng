@@ -20,6 +20,45 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 [1400]
 1401=Als Unicode speichern
 ;--------------------------------------------------------------------------
+[1500]
+;--------------------------------------------------------------------------
+[1600]
+1600=Environment
+1607=Pfade:
+1608=Benutzerdefinierte Pfade:
+1611=Einfügen
+1612=Entfernen
+1609=Readonly Strings:
+1610=Benutzerdefinierte Strings:
+1614=Einfügen
+1613=Entfernen
+2=Abbrechen
+1=OK
+;--------------------------------------------------------------------------
+[1700]
+1700=Custom Filter
+1701=Abbruch
+1702=Warte auf Exitcode
+1703=kein Eintrag
+1704=Ausführung:
+;--------------------------------------------------------------------------
+[1800]
+;--------------------------------------------------------------------------
+[1900]
+1900=Toolchain selection
+1905=Add chain
+1906=Delete chain
+1921=Add path
+1922=Delete path
+2=Cancel
+1907=Name:
+1901=Toolchains:
+1918=Add to PATH:
+1=OK
+1909=Binary:
+1912=Library:
+1915=Include:
+;--------------------------------------------------------------------------
 [2000]
 1=OK
 2=Abbrechen
@@ -488,6 +527,7 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 10208=Tab zum Projekt hinzufügen
 10209=Alle Nicht-Projekt-Tabs schließen
 10210=Explorer hier öffnen
+10211=Shell hier öffnen
 ;Projekt
 10002=Neues Projekt
 10003=Projekt öffnen
@@ -516,7 +556,7 @@ Lang=Deutsch (German), By B.Wiegmann / U. Richter
 10110=Projekt Optionen
 ;Ausgabe
 10092=Verstecken
-10211=Löschen
+10220=Löschen
 ;Property
 10221=&Gehe zu Deklaration
 10223=Hervorheben

@@ -50,9 +50,11 @@ Binary
 Bit
 BitReset
 BitSet
+Boolean
 ByRef
 ByVal
 Byte
+CBool
 CByte
 CDbl
 CInt

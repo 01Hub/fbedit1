@@ -994,7 +994,7 @@ Sub FindAllOutside
     Dim cpMax           As Integer              = Any
     Dim RegExMatch      As regmatch_t
     Dim OutputLine      As Integer              = Any
-    Dim HeadLineWritten As BOOLEAN              = Any
+    Dim HeadLineWritten As WINBOOLEAN              = Any
 
     UpdateFindHistory GetDlgItem (ah.hfind, IDC_CBO_FINDTEXT)
     ClearFindMsg

@@ -22,13 +22,13 @@
 #Include Once "Inc\FileIO.bi"
 
 
-Function StreamIn(ByVal hFile As HANDLE,ByVal pBuffer As ZString Ptr,ByVal NumBytes As Long,ByVal pBytesRead As Long Ptr) As Boolean
+Function StreamIn(ByVal hFile As HANDLE,ByVal pBuffer As ZString Ptr,ByVal NumBytes As Long,ByVal pBytesRead As Long Ptr) As WINBOOLEAN
 
     Return ReadFile(hFile,pBuffer,NumBytes,pBytesRead,0) Xor 1
 
 End Function
 
-Function StreamOut(ByVal hFile As HANDLE,ByVal pBuffer As ZString Ptr,ByVal NumBytes As Long,ByVal pBytesWritten As Long Ptr) As Boolean
+Function StreamOut(ByVal hFile As HANDLE,ByVal pBuffer As ZString Ptr,ByVal NumBytes As Long,ByVal pBytesWritten As Long Ptr) As WINBOOLEAN
 
     Return WriteFile(hFile,pBuffer,NumBytes,pBytesWritten,0) Xor 1
 

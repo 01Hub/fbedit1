@@ -150,7 +150,7 @@ function WndProc(byval hWin as HWND,byval uMsg as UINT,byval wParam as WPARAM,by
 end function
 
 ' This sub registers a windowclass for the custom control 
-function CreateClass(byval hModule as HMODULE,byval fGlobal as Boolean) as Integer
+function CreateClass(byval hModule as HMODULE,byval fGlobal as WINBOOLEAN) as Integer
 	dim wc as WNDCLASSEX
 
 	hInstance=hModule

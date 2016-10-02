@@ -40,6 +40,7 @@ MinorFiles=..\*.lib;..\*.exp;*.res;*.obj;
 13=RAFile.ocx
 14=RAFile.idl
 15=RAFile.tlb
+16=RAFile.sys
 
 [MakeDef]
 Menu=1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0
@@ -101,7 +102,7 @@ Group=Added files,Assembly,Resources,Misc,Modules
 [Size]
 2=0,0,672,551,323
 6=0,0,672,551,602
-1=13,41,809,677,245
+1=13,41,809,677,1152
 4=0,0,572,537,8
 7=176,155,672,551,2484
 3=0,0,0,0,16
@@ -116,7 +117,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=3
+MilestoneOnDateDate=24
 MilestoneOnDateTimeYear=2004
 MilestoneOnDateTimeMonth=12
 MilestoneOnDateTimeDate=11
@@ -184,7 +185,7 @@ BackupLocation=C:\RadASM\Masm\Projects\VCBackups\
 6=
 3=
 [PTimer]
-PTimer=63462270
+PTimer=71249700
 [Exports]
 1=GetDef
 2=GetDefEx

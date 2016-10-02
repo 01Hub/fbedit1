@@ -16,14 +16,14 @@ Type FIND
     fskipcommentline	    As Integer
     flogfind				As Integer
     fonlyonetime		    As Integer                      ' Flag set only on first hit per file, used for logging filename
-    fnoproc				    As Boolean						' Flag to handle no procedure
-    fnoreset				As Boolean						' Flag to handle opening a new file
+    fnoproc				    As WINBOOLEAN						' Flag to handle no procedure
+    fnoreset				As WINBOOLEAN						' Flag to handle opening a new file
     listoffiles			    As String
     listidx                 As Integer                      ' char index walks through listoffiles
     nlinesout			    As Integer                      ' unused
     fres					As Integer						' Find result
     RegEx                   As regex_t                      ' MOD 16.2.2012
-    Busy                    As BOOLEAN                      ' MOD 28.3.2012 lenghty op is running, clear to stop it
+    Busy                    As WINBOOLEAN                      ' MOD 28.3.2012 lenghty op is running, clear to stop it
     LoadForSearch           As ZString * 260                ' list of extensions, matching project files are loaded for searching
     SaveOnExit              As BOOL                         ' FALSE skips saving of dialogbox data (cancel button)
     FoundAny                As BOOL                         ' FALSE if nothing found in searched file

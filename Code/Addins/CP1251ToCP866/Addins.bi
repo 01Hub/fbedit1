@@ -131,21 +131,21 @@ Type ADDINDATA
 	hLangMem			As HGLOBAL						' Language translation
 	bExtOutput		As Integer						' External Output
 	HelpPath			As ZString*260					' Path to help files
-	fDebug			As Boolean						' Project is beeing debugged
-	fNoNotify		As Boolean						' No handling of RAEdit WM_NOTIFY
+	fDebug			As WINBOOLEAN						' Project is beeing debugged
+	fNoNotify		As WINBOOLEAN						' No handling of RAEdit WM_NOTIFY
 End Type
 
 Type ADDINFUNCTIONS
 	TextToOutput As Sub(ByVal sText As String)
-	SaveToIni As Sub(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,ByVal lpszTypes As ZString Ptr,ByVal lpDta As Any Ptr,ByVal fProject As Boolean)
-	LoadFromIni As Function(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,ByVal szTypes As String,ByVal lpDta As Any Ptr,ByVal fProject As Boolean) As Boolean
-	OpenTheFile As Sub(ByVal sFile As String,ByVal fHex As Boolean)
+	SaveToIni As Sub(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,ByVal lpszTypes As ZString Ptr,ByVal lpDta As Any Ptr,ByVal fProject As WINBOOLEAN)
+	LoadFromIni As Function(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,ByVal szTypes As String,ByVal lpDta As Any Ptr,ByVal fProject As WINBOOLEAN) As WINBOOLEAN
+	OpenTheFile As Sub(ByVal sFile As String,ByVal fHex As WINBOOLEAN)
 	Compile As Function(ByVal sMake As String) As Integer
-	ShowOutput As Sub(ByVal bShow As Boolean)
+	ShowOutput As Sub(ByVal bShow As WINBOOLEAN)
 	TranslateAddinDialog As Sub(ByVal hWin As HWND,ByVal sID As String)
 	FindString As Function(ByVal hMem As HGLOBAL,ByVal szApp As String,ByVal szKey As String) As String
 	CallAddins As Function(ByVal hWin As HWND,ByVal uMsg As UINT,wParam As WPARAM,lParam As LPARAM,ByVal hook1 As UINT) As Integer
-	ShowImmediate As Sub(ByVal bShow As Boolean)
+	ShowImmediate As Sub(ByVal bShow As WINBOOLEAN)
 End Type
 
 ' Addin messages you can send to FbEdit main window

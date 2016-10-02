@@ -41,7 +41,7 @@ End Type
 
 Dim Shared hInstance As HINSTANCE
 Dim Shared hLib As HMODULE
-Dim Shared AtlAxWinInit As Function As Boolean
+Dim Shared AtlAxWinInit As Function As WINBOOLEAN
 Dim Shared AtlAxGetControl As Function (ByVal hWin As HWND,ByVal pp As Integer ptr) As Integer
 
 Dim Shared IID_IWebBrowser As IID=(&H0EAB22AC1,&H030C1,&H011CF,{&H0A7,&H0EB,&H000,&H000,&H0C0,&H05B,&H0AE,&H00B})
@@ -127,7 +127,7 @@ Function WndProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,By
 End Function
 
 ' This sub registers a windowclass for the custom control 
-Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As Boolean) As Integer
+Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As WINBOOLEAN) As Integer
 	Dim wc As WNDCLASSEX
 
 	hInstance=hModule

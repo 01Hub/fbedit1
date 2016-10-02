@@ -144,7 +144,7 @@ Nxt:
 
 End Sub
 
-Function DlgTranslateProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As Boolean
+Function DlgTranslateProc(ByVal hWin As HWND,ByVal lParam As LPARAM) As WINBOOLEAN
 	Dim buff As ZString*256
 	Dim id As Integer
 

@@ -231,7 +231,7 @@ Function GetOwner() As HWND
 
 End Function
 
-Sub ShowOutput(ByVal bShow As Boolean)
+Sub ShowOutput(ByVal bShow As WINBOOLEAN)
 
 	If bShow Then
 		If (wpos.fview And VIEW_OUTPUT)=0 Then
@@ -245,7 +245,7 @@ Sub ShowOutput(ByVal bShow As Boolean)
 
 End Sub
 
-Sub ShowImmediate(ByVal bShow As Boolean)
+Sub ShowImmediate(ByVal bShow As WINBOOLEAN)
 
 	If bShow Then
 		If (wpos.fview And VIEW_IMMEDIATE)=0 Then
@@ -314,7 +314,7 @@ Sub ListAllBookmarks ()
 	Dim LineNo          As Integer    = Any
 	Dim EditorLines     As Integer    = Any
 	Dim OutputLine      As Integer    = Any
-	Dim HeadLineWritten As BOOLEAN    = Any
+	Dim HeadLineWritten As WINBOOLEAN    = Any
 	Dim BookmarkID      As Integer    = Any
 	Dim EditorMode      As Long       = Any
 	

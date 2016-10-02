@@ -7,7 +7,7 @@ Function FileBrowserProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As W
 	Dim ht As TVHITTESTINFO
 	Dim tvi As TV_ITEM
 	Dim sFile As String*260
-	Dim fCtrl As Boolean
+	Dim fCtrl As WINBOOLEAN
     Dim p As Point
     Dim Item As LRESULT
 

@@ -45,7 +45,7 @@ sub AddToAccelerator(byval fvirt as integer,byval akey as integer,byval id as in
 
 end sub
 
-function StreamIn(byval hFile as HANDLE,byval pBuffer as zstring ptr,byval NumBytes as long,byval pBytesRead as long ptr) as boolean
+function StreamIn(byval hFile as HANDLE,byval pBuffer as zstring ptr,byval NumBytes as long,byval pBytesRead as long ptr) as WINBOOLEAN
 
 	return ReadFile(hFile,pBuffer,NumBytes,pBytesRead,0) xor 1
 

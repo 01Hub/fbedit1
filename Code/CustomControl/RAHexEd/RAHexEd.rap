@@ -79,7 +79,7 @@ Options=52
 [Size]
 4=0,0,0,0,58
 2=0,0,0,0,531
-1=0,0,0,0,38866
+1=0,0,0,0,868
 3=0,0,0,0,45
 6=0,0,0,0,2927
 7=0,0,0,0,777
@@ -91,7 +91,7 @@ Options=52
 16=0,0,0,0,5689
 15=0,0,0,0,1518
 14=0,0,0,0,295
-17=0,0,0,0,3246
+17=0,0,0,0,3325
 
 [BookMark]
 0=
@@ -110,7 +110,7 @@ Options=52
 0=
 
 [AutoLoad]
-AutoLoad=1,7,13,6,9,15,16,8,14,2,4,3
+AutoLoad=1,7,13,6,9,15,16,8,14,2,4,3,17
 
 [Find]
 1="setcursor"
@@ -172,7 +172,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=8
+MilestoneOnDateDate=24
 MilestoneOnDateTimeYear=2004
 MilestoneOnDateTimeMonth=11
 MilestoneOnDateTimeDate=19
@@ -216,7 +216,7 @@ ProductVer4Range=0
 14=,
 4=
 [PTimer]
-PTimer=235617771
+PTimer=235715225
 [Exports]
 1=GetDef
 2=GetDefEx

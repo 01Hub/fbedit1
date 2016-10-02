@@ -47,7 +47,7 @@ Const szSecEdit2=			!"C0=\34Abs ACos ASin ATan2 Atn Cos Exp Fix Frac Int Log Ran
 								!"C1=\34Screen ScreenControl ScreenCopy ScreenEvent ScreenGLProc ScreenInfo ScreenList ScreenLock ScreenPtr ScreenRes ScreenSet ScreenSync ScreenUnLock \34\13\10"_
 								!"C2=\34And AndAlso Delete Eqv Imp Let Mod New Not Or OrElse ProcPtr Shl Shr StrPtr VarPtr Xor \34\13\10"_
 								!"C3=\34$Dynamic $Include $Lang $Static #Define #Else #ElseIf #EndIf #EndMacro #Error #If #Ifdef #Ifndef #Inclib #Include #Lang #LibPath #Line #Macro #Pragma #Print #Undef \34\13\10"_
-								!"C4=\34CByte CDbl CInt CLng CLngInt CPtr CShort CSign CSng CUByte CUInt CULng CULngint CUnsg CUShort CVD CVI CVL CVLongInt CVS CVShort \34\13\10"_
+								!"C4=\34CBool CByte CDbl CInt CLng CLngInt CPtr CShort CSign CSng CUByte CUInt CULng CULngint CUnsg CUShort CVD CVI CVL CVLongInt CVS CVShort \34\13\10"_
 								!"C5=\34Base Second Seek SetDate SetEnviron SetMouse SetTime Shell SizeOf Sleep Space Spc Static StdCall Stick Stop Str Strig Swap System Scrn Tab This ThreadCall ThreadCreate ThreadWait Time Timer TimeSerial TimeValue To Trans Trim TypeOf UBound UCase Union UnLock Unsigned Until Using va_arg va_first va_next Val ValInt ValLng ValUInt ValULng Var View Wait WBin WChr Weekday WeekdayName WHex Width Window WindowTitle WInput With WOct Write WSpace WStr Year \34\13\10"_
 								!"C6=\34Access Add Alias Allocate Alpha Append Asc Asm Assert AssertWarn Beep Bin Binary Bit BitReset BitSet BLoad BSave Call CAllocate Cast Cdecl Chain ChDir Chr Circle Class Clear Close Cls Color Command Common CondBroadcast CondCreate CondDestroy CondSignal CondWait Continue CsrLin CurDir Data Date DateAdd DateDiff DatePart DateSerial DateValue Day DeAllocate DefByte DefDbl Defined DefInt DefLng DefLongInt \34\13\10"_
 								!"C7=\34DefShort DefSng DefStr DefUByte DefUInt DefULongInt DefUShort Dir Draw DyLibFree DyLibLoad DyLibSymbol Encoding Enum Environ Eof Erase Erfn Erl Ermn Err Error Exec ExePath Exit Explicit Export Extern Field FileAttr FileCopy FileDateTime FileExists FileLen Flip Format Frac Fre FreeFile Get GetJoystick GetKey GetMouse GoSub GoTo Hex HiByte HiWord Hour IIf ImageConvertRow ImageCreate ImageDestroy ImageInfo Import InKey Inp Input InStr InStrRev Is IsDate Kill LBound LCase Left Len Lib Line LoByte Loc Local Locate Lock Lof LoWord LPos LPrint LSet LTrim \34\13\10"_
@@ -55,7 +55,7 @@ Const szSecEdit2=			!"C0=\34Abs ACos ASin ATan2 Atn Cos Exp Fix Frac Int Log Ran
 								!"C9=\34Const Case Constructor Declare Destructor Dim If Then Else ElseIf End EndIf For Do Loop While Wend Function Namespace Next Operator Property Select Step Sub Then Type \34\13\10"_
 								!"C10=\34#define #include ACCELERATORS ALT AUTOCHECKBOX AUTORADIOBUTTON BEGIN BITMAP BLOCK CAPTION CLASS COMBOBOX CONTROL CURSOR DIALOGEX DISCARDABLE EDITTEXT END EXSTYLE FALSE FILEOS FILETYPE FILEVERSION FONT GROUPBOX ICON LISTBOX LTEXT MENU MENUITEM NOINVERT NULL POPUP PRODUCTVERSION PUSHBUTTON SEPARATOR SHIFT STRINGTABLE STYLE TRUE VALUE VERSIONINFO VIRTKEY \34\13\10"_
 								!"C11=\34__DATE__ __DATE_ISO__ __FB_ARGC__ __FB_ARGV__ __FB_BIGENDIAN__ __FB_BUILD_DATE__ __FB_CYGWIN__ __FB_DEBUG__ __FB_DOS__ __FB_ERR__ __FB_FPMODE__ __FB_FPU__ __FB_FREEBSD__ __FB_LANG__ __FB_LINUX__ __FB_MAIN__ __FB_MIN_VERSION__ __FB_MT__ __FB_NETBSD__ __FB_OPENBSD__ __FB_OPTION_BYVAL__ __FB_OPTION_DYNAMIC__ __FB_OPTION_ESCAPE__ __FB_OPTION_EXPLICIT__ __FB_OPTION_GOSUB__ __FB_OPTION_PRIVATE__ __FB_OUT_DLL__ __FB_OUT_EXE__ __FB_OUT_LIB__ __FB_OUT_OBJ__ __FB_PCOS__ __FB_SIGNATURE__ __FB_SSE__ __FB_UNIX__ __FB_VECTORIZE__ __FB_VER_MAJOR__ __FB_VER_MINOR__ __FB_VER_PATCH__ __FB_VERSION__ __FB_WIN32__ __FB_XBOX__ __FILE__ __FILE_NQ__ __FUNCTION__ __FUNCTION_NQ__ __LINE__ __PATH__ __TIME__ \34\13\10"_
-								!"C12=\34Any Byte Double Integer Long LongInt Object Ptr Short Single String UByte UInteger ULong ULongInt UShort WString ZString \34\13\10"_
+								!"C12=\34Any WINBOOLEAN Byte Double Integer Long LongInt Object Ptr Short Single String UByte UInteger ULong ULongInt UShort WString ZString \34\13\10"_
 								!"C13=\34\34\13\10"_
 								!"C14=\34\34\13\10"_
 								!"C15=\34\34\13\10"_
@@ -219,7 +219,7 @@ Sub IniKeyNotFoundMsg (ByVal pSectionName As ZString Ptr, ByVal pKeyName As ZStr
 
 End Sub
 
-Sub SaveToIni (ByVal pSection As ZString Ptr, ByVal pKey As ZString Ptr, ByRef Types As ZString, ByVal pStruct As Any Ptr, ByVal fProject As Boolean)
+Sub SaveToIni (ByVal pSection As ZString Ptr, ByVal pKey As ZString Ptr, ByRef Types As ZString, ByVal pStruct As Any Ptr, ByVal fProject As WINBOOLEAN)
 	
 	Dim value   As ZString * 4096
 	Dim buffer  As ZString * 256
@@ -280,7 +280,7 @@ Sub SaveToIni (ByVal pSection As ZString Ptr, ByVal pKey As ZString Ptr, ByRef T
 	
 End Sub
 
-'Sub SaveToIni(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,Byref lpszTypes As ZString,ByVal lpDta As Any Ptr,ByVal fProject As Boolean)
+'Sub SaveToIni(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,Byref lpszTypes As ZString,ByVal lpDta As Any Ptr,ByVal fProject As WINBOOLEAN)
 '	Dim value As ZString*4096
 '	Dim i As Integer = Any
 '	Dim ofs As Integer
@@ -330,7 +330,7 @@ End Sub
 '	                                                                          ' MOD 25.1.2012  WritePrivateProfileString(lpszApp,lpszKey,@value,@tmp)
 'End Sub
 
-Function LoadFromIni(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,Byref szTypes As zString,ByVal lpDta As Any Ptr,ByVal fProject As Boolean) As Boolean
+Function LoadFromIni(ByVal lpszApp As ZString Ptr,ByVal lpszKey As ZString Ptr,Byref szTypes As zString,ByVal lpDta As Any Ptr,ByVal fProject As WINBOOLEAN) As WINBOOLEAN
 	Dim i As Integer = any
 	Dim ofs As Integer
 	Dim tmp As ZString*256

@@ -31,14 +31,14 @@ Const szDestructor               As String = "Destructors"
 Const szProperty                 As String = "Properties"
 Const szOperator                 As String = "Operators"
 
-Dim Shared ftypelist             As Boolean
-Dim Shared fconstlist            As Boolean
-Dim Shared fstructlist           As Boolean
-Dim Shared fmessagelist          As Boolean
-Dim Shared flocallist            As Boolean
-Dim Shared fincludelist          As Boolean
-Dim Shared fincliblist           As Boolean
-Dim Shared fenumlist             As Boolean
+Dim Shared ftypelist             As WINBOOLEAN
+Dim Shared fconstlist            As WINBOOLEAN
+Dim Shared fstructlist           As WINBOOLEAN
+Dim Shared fmessagelist          As WINBOOLEAN
+Dim Shared flocallist            As WINBOOLEAN
+Dim Shared fincludelist          As WINBOOLEAN
+Dim Shared fincliblist           As WINBOOLEAN
+Dim Shared fenumlist             As WINBOOLEAN
 Dim Shared sEditFileName         As ZString * MAX_PATH
 Dim Shared ccpos                 As ZString Ptr
 Dim Shared ccstring              As ZString * 65536
@@ -279,7 +279,7 @@ Sub MoveList()
 
 End Sub
 
-Function FindExact(ByVal lpTypes As ZString Ptr,ByVal lpFind As ZString Ptr,ByVal fMatchCase As Boolean) As ZString Ptr
+Function FindExact(ByVal lpTypes As ZString Ptr,ByVal lpFind As ZString Ptr,ByVal fMatchCase As WINBOOLEAN) As ZString Ptr
 	Dim lret As ZString Ptr
 
 	lret=Cast(ZString Ptr,SendMessage(ah.hpr,PRM_FINDFIRST,Cast(Integer,lpTypes),Cast(Integer,lpFind)))
@@ -793,7 +793,7 @@ Function UpdateConstList(ByVal lpszApi As ZString Ptr,ByVal npos As Integer) As 
 
 End Function
 
-Function UpdateEnumList(ByVal lpszEnum As ZString Ptr) As Boolean
+Function UpdateEnumList(ByVal lpszEnum As ZString Ptr) As WINBOOLEAN
 	Dim lret As ZString Ptr
 	Dim chrg As CHARRANGE
 	Dim ln As Integer

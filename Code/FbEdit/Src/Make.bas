@@ -198,10 +198,10 @@ End Sub
 'End Sub
 
 Function ProcessQuickRun(ByVal Param As ZString Ptr) As Integer
-	Dim sat As SECURITY_ATTRIBUTES
-	Dim startupinfo As STARTUPINFO
+	Dim sat  As SECURITY_ATTRIBUTES
+	Dim sui  As STARTUPINFO
 	Dim lret As Integer
-	Dim i As Integer
+	Dim i    As Integer
 	Dim buff As ZString*MAX_PATH
     'Dim ErrMsg As ZString * 256
 
@@ -215,15 +215,15 @@ Function ProcessQuickRun(ByVal Param As ZString Ptr) As Integer
 		TextToOutput OTT_WINLASTERROR
 		TextToOutput "*** CreatePipe failed ***", MB_ICONERROR
 	Else
-		startupinfo.cb=SizeOf(STARTUPINFO)
-		GetStartupInfo(@startupinfo)
-		startupinfo.hStdOutput=makeinf.hwr
-		startupinfo.hStdError=makeinf.hwr
-		startupinfo.dwFlags=STARTF_USESHOWWINDOW
-		startupinfo.wShowWindow=SW_SHOWNORMAL
+		sui.cb=SizeOf(STARTUPINFO)
+		GetStartupInfo(@sui)
+		sui.hStdOutput=makeinf.hwr
+		sui.hStdError=makeinf.hwr
+		sui.dwFlags=STARTF_USESHOWWINDOW
+		sui.wShowWindow=SW_SHOWNORMAL
 		
 		' Create process
-		If CreateProcess (NULL, @buff, NULL, NULL, FALSE, NULL, NULL, NULL, @startupinfo, @makeinf.pInfo) = FALSE Then
+	If CreateProcess (NULL, @buff, NULL, NULL, FALSE, NULL, NULL, NULL, @sui, @makeinf.pInfo) = FALSE Then
 			' CreateProcess failed
 			TextToOutput OTT_WINLASTERROR
 			TextToOutput "*** CreateProcess failed ***", MB_ICONERROR
@@ -352,7 +352,7 @@ End Sub
 Function ProcessBuild(ByVal pCmdLine As ZString Ptr) As Integer
 
 	Dim sat         As SECURITY_ATTRIBUTES
-	Dim startupinfo As STARTUPINFO
+	Dim sui         As STARTUPINFO
 	Dim pinfo       As PROCESS_INFORMATION
 	Dim hrd         As HANDLE
 	Dim hwr         As HANDLE
@@ -374,15 +374,15 @@ Function ProcessBuild(ByVal pCmdLine As ZString Ptr) As Integer
 		TextToOutput "*** CreatePipe failed ***", MB_ICONERROR
 		Return CREATE_PIPE_FAILED
 	Else
-		startupinfo.cb          = SizeOf(STARTUPINFO)
-		GetStartupInfo @STARTUPINFO
-		startupinfo.hStdOutput  = hwr
-		startupinfo.hStdError   = hwr
-		startupinfo.hStdInput   = hrd
-		startupinfo.dwFlags     = STARTF_USESHOWWINDOW Or STARTF_USESTDHANDLES
-		startupinfo.wShowWindow = SW_HIDE
+		sui.cb          = SizeOf(STARTUPINFO)
+		GetStartupInfo @sui
+		sui.hStdOutput  = hwr
+		sui.hStdError   = hwr
+		sui.hStdInput   = hrd
+		sui.dwFlags     = STARTF_USESHOWWINDOW Or STARTF_USESTDHANDLES
+		sui.wShowWindow = SW_HIDE
 
-		Success = CreateProcess (NULL, pCmdLine, NULL, NULL, TRUE, NULL, NULL, NULL, @startupinfo, @pinfo)
+		Success = CreateProcess (NULL, pCmdLine, NULL, NULL, TRUE, NULL, NULL, NULL, @sui, @pinfo)
 		If Success = FALSE Then
 		    TextToOutput OTT_WINLASTERROR
 			TextToOutput "*** CreateProcess failed ***", MB_ICONERROR
@@ -420,7 +420,7 @@ Function ProcessBuild(ByVal pCmdLine As ZString Ptr) As Integer
 	
 End Function
 
-Function GetErrLine(Byref ErrMsgLine As zString, ByVal fQuickRun As Boolean) As Integer
+Function GetErrLine(Byref ErrMsgLine As zString, ByVal fQuickRun As WINBOOLEAN) As Integer
 
 	Dim CurrPath           As ZString * MAX_PATH
 	Dim FileSpec           As ZString * MAX_PATH
@@ -557,7 +557,7 @@ Sub DeleteFiles(Byref sFile As zString)
 
 End Sub
 
-Function MakeBuild (ByRef sMakeOpt As ZString, ByRef sFile As ZString, ByRef CCLName As ZString, ByVal fOnlyThisModule As BOOLEAN, ByVal fNoClear As BOOLEAN, ByVal fQuickRun As BOOLEAN) As Integer
+Function MakeBuild (ByRef sMakeOpt As ZString, ByRef sFile As ZString, ByRef CCLName As ZString, ByVal fOnlyThisModule As WINBOOLEAN, ByVal fNoClear As WINBOOLEAN, ByVal fQuickRun As WINBOOLEAN) As Integer
 	
 	Dim FileID   As Integer            = Any
 	Dim nMiss    As Integer            = Any

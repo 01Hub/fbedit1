@@ -2,7 +2,7 @@
 
 #LibPath "..\FbEditDLL\Build"
 #Inclib  "FbEdit"
-Declare Function GetCharTabPtr StdCall Alias "GetCharTabPtr" () As Any Ptr
+Declare Function RAEdit_GetCharTabPtr () As Any Ptr
 	' other publics
 	'SetHiliteWords proc public uses esi edi,nColor:DWORD,lpWords:DWORD
 	'GetCharTabVal proc public nChar:DWORD
@@ -54,7 +54,7 @@ Common Shared fTimer              As Integer
 'Common Shared fChangeNotification As Integer
 
 Common Shared nHideOut            As Integer
-Common Shared fInUse              As BOOLEAN
+Common Shared fInUse              As WINBOOLEAN
 
 ' Modeless dialogs
 Common Shared findvisible         As HWND

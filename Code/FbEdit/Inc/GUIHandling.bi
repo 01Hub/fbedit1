@@ -17,8 +17,8 @@ Declare Function ImmediateProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wPar
 Declare Function OutputProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 Declare Function FileBrowserProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WPARAM, ByVal lParam As LPARAM) As Integer
 
-Declare Sub ShowOutput (ByVal bShow As Boolean)
-Declare Sub ShowImmediate (ByVal bShow As Boolean)
+Declare Sub ShowOutput (ByVal bShow As WINBOOLEAN)
+Declare Sub ShowImmediate (ByVal bShow As WINBOOLEAN)
 
 Declare Sub TextToOutput OverLoad (Byval pText As ZString Ptr)
 Declare Sub TextToOutput OverLoad (Byval pText As ZString Ptr, ByVal SoundNo As UINT)

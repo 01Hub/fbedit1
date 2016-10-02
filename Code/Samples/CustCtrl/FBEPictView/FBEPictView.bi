@@ -1,4 +1,4 @@
-Declare Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As Boolean) As Integer
+Declare Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As WINBOOLEAN) As Integer
 
 ' Styles
 #Define STYLE_SIZENONE				0

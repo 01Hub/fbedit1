@@ -18,5 +18,5 @@
 
 dim shared hLib as HMODULE
 dim shared sFile as ZString*260
-dim shared fActivated as Boolean
-dim shared fRepeat as Boolean
+dim shared fActivated as WINBOOLEAN
+dim shared fRepeat as WINBOOLEAN

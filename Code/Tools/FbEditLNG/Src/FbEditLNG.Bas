@@ -12,7 +12,7 @@
 #Include "DialogLNG.bas"
 #Include "StringLNG.bas"
 
-Function OpenProject(ByVal hWin As HWND) As Boolean
+Function OpenProject(ByVal hWin As HWND) As WINBOOLEAN
 	Dim ofn As OPENFILENAME
 	Dim buff As ZString*260
 	Dim hFile As HANDLE
@@ -48,7 +48,7 @@ Function OpenProject(ByVal hWin As HWND) As Boolean
 
 End Function
 
-Function SaveFileAs(ByVal hWin As HWND) As Boolean
+Function SaveFileAs(ByVal hWin As HWND) As WINBOOLEAN
 	Dim ofn As OPENFILENAME
 	Dim buff As ZString*260
 	Dim hFile As HANDLE
@@ -83,7 +83,7 @@ Function SaveFileAs(ByVal hWin As HWND) As Boolean
 
 End Function
 
-Function WantToSave(ByVal hWin As HWND) As Boolean
+Function WantToSave(ByVal hWin As HWND) As WINBOOLEAN
 	Dim lRet As Integer
 
 	If SendMessage(hEdt,EM_GETMODIFY,0,0) Then

@@ -166,7 +166,7 @@ Sub TrimTrailingSpaces
 
 End Sub
 
-Sub IndentComment(Byref char As zString,ByVal fUn As Boolean)
+Sub IndentComment(Byref char As zString,ByVal fUn As WINBOOLEAN)
 	Dim ochrg As CHARRANGE
 	Dim chrg As CHARRANGE
 	Dim As Integer LnSt,LnEn,LnCnt,tmp,nmin,n,x,bm
@@ -828,7 +828,7 @@ Sub CodeComplete(ByVal hWin As HWND)
 
 End Sub
 
-Function ReplaceType(ByVal lpProc As ZString Ptr,ByVal nOwner As Integer,ByVal nLine As Integer) As Boolean
+Function ReplaceType(ByVal lpProc As ZString Ptr,ByVal nOwner As Integer,ByVal nLine As Integer) As WINBOOLEAN
 	'Dim x As Integer
 	'Dim y As Integer
 	Dim lret As ZString Ptr
@@ -1136,11 +1136,14 @@ Function CoTxEdProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WPA
 					lret=CallWindowProc(lpOldCoTxEdProc,hWin,uMsg,wParam,lParam)
 					TestCaseConvert(hPar,wParam)
 					SendMessage(hPar,EM_EXGETSEL,0,Cast(LPARAM,@prechrg))
-					If (wParam=Asc(".") Or wParam=Asc(">")) And fconstlist=TRUE Then
-						HideCCLists
+					If fconstlist = TRUE Then 
+					    If (wParam = Asc(".") OrElse wParam = Asc(">")) Then
+						    HideCCLists
+					    EndIf 
 					EndIf
 				    TestUpdate:
-					If (IsWindowVisible(ah.hcc) Or fconstlist) Then
+					If CBool (IsWindowVisible (ah.hcc)) _ 
+					OrElse fconstlist Then 
 						If fconstlist=TRUE Then
 							GetLineByCaret(hPar,@buff,0)
 							TrimWhiteSpace buff

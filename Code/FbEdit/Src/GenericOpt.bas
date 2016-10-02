@@ -29,7 +29,7 @@
 #Define IDC_BTN_IMPORT						3209
 
 
-Dim Shared fListUpdate As Boolean
+Dim Shared fListUpdate As WINBOOLEAN
 Dim Shared nType       As Integer
 
 

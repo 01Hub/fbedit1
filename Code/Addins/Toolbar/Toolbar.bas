@@ -175,7 +175,7 @@ sub ExportToolbar(byval hWin as HWND)
 	dim n as integer
 	dim buff as zstring*32
 	dim nval as integer
-	Dim bDef As Boolean
+	Dim bDef As WINBOOLEAN
 
 	lpFUNCTIONS->ShowOutput(TRUE)
 	SetWindowText(lpHANDLES->hout,NULL)

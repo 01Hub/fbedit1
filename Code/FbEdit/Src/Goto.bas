@@ -94,7 +94,7 @@ End Sub
 
 ' ==============================
 ' MOD 21.1.2012
-Sub GotoTextLine (ByVal hWin As HWND, ByVal LineNo As Long, ByVal VCenter As BOOLEAN)
+Sub GotoTextLine (ByVal hWin As HWND, ByVal LineNo As Long, ByVal VCenter As WINBOOLEAN)
 
     Dim chrg As CHARRANGE = Any
 

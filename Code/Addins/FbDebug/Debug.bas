@@ -365,7 +365,7 @@ End Function
 
 Sub ParseDebugInfo()
 	Dim As UInteger i,j
-	Dim As Boolean bNoDebug
+	Dim As WINBOOLEAN bNoDebug
 	
 	' Beginning of section area
 	pe=&h400086

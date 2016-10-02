@@ -108,7 +108,7 @@ Sub GetPictureFromFile(ByVal lpszFile As ZString ptr)
 	Dim hGlobal As HGLOBAL
 	Dim pvData As HGLOBAL
 	Dim dwBytesRead As Integer
-	Dim bRead As Boolean
+	Dim bRead As WINBOOLEAN
 
 	pIStream=0
 	pIPicture=0
@@ -168,7 +168,7 @@ Sub GetPictureFromResource(ByVal hInst As HINSTANCE,ByVal ResNumber As Integer)
 
 End Sub
 
-Function GetSize(ByVal hWin As HWND) As Boolean
+Function GetSize(ByVal hWin As HWND) As WINBOOLEAN
    Dim hmWidth As Integer
    Dim hmHeight As Integer
 	Dim lpFBEPICTVIEW As FBEPICTVIEW ptr
@@ -202,7 +202,7 @@ Function GetSize(ByVal hWin As HWND) As Boolean
 
 End Function
 
-Function LoadPict(ByVal hWin As HWND) As Boolean
+Function LoadPict(ByVal hWin As HWND) As WINBOOLEAN
    Dim hmWidth As Integer
    Dim hmHeight As Integer
 	Dim lpFBEPICTVIEW As FBEPICTVIEW ptr
@@ -399,7 +399,7 @@ Function WndProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,By
 End Function
 
 ' This sub registers a windowclass for the custom control 
-Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As Boolean) As Integer
+Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As WINBOOLEAN) As Integer
 	Dim wc As WNDCLASSEX
 
 	hInstance=hModule

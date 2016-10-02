@@ -258,7 +258,7 @@ Function GetEditWindowByFocus () As HWND
 
 End Function
 
-Function ShowTab (ByRef FileSpec As ZString) As BOOLEAN
+Function ShowTab (ByRef FileSpec As ZString) As WINBOOLEAN
 
     Dim hEdit As HWND = Any
 
@@ -356,7 +356,7 @@ Sub GetTabIDBySpec (ByRef FileSpec As ZString, ByRef TabID As Integer, ByRef Edi
 
 End Sub
 
-Sub NextTab(ByVal fPrev As Boolean)
+Sub NextTab(ByVal fPrev As WINBOOLEAN)
 
 	Dim n        As Integer    = Any
 	Dim i        As Integer    = Any
@@ -384,7 +384,7 @@ Sub NextTab(ByVal fPrev As Boolean)
 
 End Sub
 
-Function WantToSaveTab (ByVal TabID As Integer) As BOOLEAN     ' MOD 9.2.2012 ADD
+Function WantToSaveTab (ByVal TabID As Integer) As WINBOOLEAN     ' MOD 9.2.2012 ADD
 	
     ' TabID = 0 ... n  (zerobased)
 
@@ -432,7 +432,7 @@ Function CloseTab (ByVal TabID As Integer, ByVal Mode As CloseTabMode = CTM_STD)
         If pTABMEM->locked = FALSE _
         OrElse edtopt.closeonlocks = TRUE Then
 
-            If Mode And CTM_IGNORE_DIRTY _
+            If     CBool (Mode And CTM_IGNORE_DIRTY) _
             OrElse WantToSaveTab (TabID) = FALSE Then           ' MOD 1.2.2012    WantToSave(hWin)=FALSE
 
            		CurrTabID = SendMessage (ah.htabtool, TCM_GETCURSEL, 0, 0)
@@ -542,7 +542,7 @@ End Function
 '	HideList()
 'End Sub
 
-Sub AddTab(ByVal hEdt As HWND, ByRef lpFileName As ZString, ByVal AddMode As AddTabMode)        'MOD2.2.2012    AddTab(ByVal hEdt As HWND,ByVal lpFileName As String,ByVal fHex As Boolean)
+Sub AddTab(ByVal hEdt As HWND, ByRef lpFileName As ZString, ByVal AddMode As AddTabMode)        'MOD2.2.2012    AddTab(ByVal hEdt As HWND,ByVal lpFileName As String,ByVal fHex As WINBOOLEAN)
 
 	Dim tci      As TCITEM
 	'Dim i As Integer         MOD 27.1.2012
@@ -1061,7 +1061,7 @@ Sub OpenTheFile (Byref FileSpec As ZString, ByVal OpenMode As FileOpenMode)
 	End Select
 End Sub
 
-Sub OpenAFile (ByVal OpenMode As FileOpenMode)         ' MOD 1.2.2012 OpenAFile(ByVal hWin As HWND,ByVal fHex As Boolean)
+Sub OpenAFile (ByVal OpenMode As FileOpenMode)         ' MOD 1.2.2012 OpenAFile(ByVal hWin As HWND,ByVal fHex As WINBOOLEAN)
 
 	Dim ofn     As OPENFILENAME
 	Dim Buffer  As ZString * 32 * 1024
@@ -1098,7 +1098,7 @@ Sub OpenAFile (ByVal OpenMode As FileOpenMode)         ' MOD 1.2.2012 OpenAFile(
 	EndIf
 End Sub
 
-'Sub OpenAFile(ByVal hWin As HWND,ByVal fHex As Boolean)
+'Sub OpenAFile(ByVal hWin As HWND,ByVal fHex As WINBOOLEAN)
 '	Dim ofn As OPENFILENAME
 '	Dim hMem As HGLOBAL
 '	Dim i As Integer
@@ -1176,7 +1176,7 @@ Function UnicodeProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam as WPARA
 
 End Function
 
-Function SaveTabAs() As BOOLEAN
+Function SaveTabAs() As WINBOOLEAN
 	
 	Dim ofn      As OPENFILENAME
     Dim FileSpec As ZString * MAX_PATH
@@ -1212,7 +1212,7 @@ Function SaveTabAs() As BOOLEAN
 
 End Function
 
-'Function WantToSaveCurrent() As BOOLEAN     ' MOD 1.2.2012 WantToSave(ByVal hWin As HWND) As Boolean
+'Function WantToSaveCurrent() As WINBOOLEAN     ' MOD 1.2.2012 WantToSave(ByVal hWin As HWND) As WINBOOLEAN
 '	
 '	Dim x As Integer = Any
 '	
@@ -1494,8 +1494,8 @@ Function CloseAllNonProjectTabs () As BOOL
 
 End Function
 
-'Function CloseAllTabs(ByVal fProjectClose As Boolean,ByVal hWinDontClose As HWND,ByVal fCloseLocked As Boolean=FALSE) As Boolean
-'                                                         ' MOD 1.2.2012   Function CloseAllTabs(ByVal hWin As HWND,ByVal fProjectClose As Boolean,ByVal hWinDontClose As HWND,ByVal fCloseLocked As Boolean=FALSE) As Boolean
+'Function CloseAllTabs(ByVal fProjectClose As WINBOOLEAN,ByVal hWinDontClose As HWND,ByVal fCloseLocked As WINBOOLEAN=FALSE) As WINBOOLEAN
+'                                                         ' MOD 1.2.2012   Function CloseAllTabs(ByVal hWin As HWND,ByVal fProjectClose As WINBOOLEAN,ByVal hWinDontClose As HWND,ByVal fCloseLocked As WINBOOLEAN=FALSE) As WINBOOLEAN
 '	Dim tci As TCITEM
 '	Dim i As Integer
 '	Dim x As Integer
@@ -1585,7 +1585,7 @@ End Function
 '
 'End Function
 
-Sub OpenAProject ()                           ' MOD 1.2.2012    OpenAProject(ByVal hWin As HWND) As Boolean
+Sub OpenAProject ()                           ' MOD 1.2.2012    OpenAProject(ByVal hWin As HWND) As WINBOOLEAN
 
 	Dim ofn   As OPENFILENAME
 	Dim sFile As ZString * MAX_PATH

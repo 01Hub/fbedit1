@@ -16,7 +16,7 @@
 
 
 Dim Shared OldUrlProc As Any Ptr
-Dim Shared fMouseOver As Boolean
+Dim Shared fMouseOver As WINBOOLEAN
 Dim Shared hUrlFont As HFONT
 Dim Shared hUrlFontU As HFONT
 'Dim Shared hUrlBrush As HBRUSH           MOD 15.1.2012 (unused)

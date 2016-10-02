@@ -96,7 +96,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=8
+MilestoneOnDateDate=24
 MilestoneOnDateTimeYear=2005
 MilestoneOnDateTimeMonth=1
 MilestoneOnDateTimeDate=6
@@ -129,11 +129,11 @@ BackupLocation=C:\RadASM\Masm\Projects\VCBackups\
 6=00FFFFFF
 7=00FFFFFF
 [Size]
-1=0,0,0,0,2778
+1=0,0,0,0,362
 3=0,0,0,0,53
 2=0,0,0,0,1394
 4=0,0,0,0,23
-7=0,0,0,0,2994
+7=0,0,0,0,3272
 6=0,0,0,0,171
 8=0,0,0,0,1260
 10=0,0,0,0,2042
@@ -171,12 +171,12 @@ BackupLocation=C:\RadASM\Masm\Projects\VCBackups\
 10=,
 4=
 [PTimer]
-PTimer=76320717
+PTimer=76383786
 [Exports]
 1=GetDef
 2=GetDefEx
 [AutoLoad]
-AutoLoad=1,6,2,3,4,10,8
+AutoLoad=1,6,2,3,4,10,8,7
 [RADebugBP]
 1=
 6=

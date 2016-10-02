@@ -184,7 +184,7 @@ Function GetFileName (ByVal pFileSpec As ZString Ptr) As ZString Ptr   ' MOD 22.
 
     '=================================
     ' MOD 22.1.2012
-    'Function GetFileName(ByVal sFile As String,ByVal fExt As Boolean) As String
+    'Function GetFileName(ByVal sFile As String,ByVal fExt As WINBOOLEAN) As String
 	'Dim x As Integer
 	'Dim sItem As ZString*260
     '

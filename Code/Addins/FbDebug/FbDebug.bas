@@ -124,7 +124,7 @@ Sub LoadBreakpoints(ByVal hWin As HWND,ByVal nInx As Integer)
 
 End Sub
 
-Function CheckBpLine(ByVal nLine As Integer,ByVal lpszFile As ZString Ptr) As Boolean
+Function CheckBpLine(ByVal nLine As Integer,ByVal lpszFile As ZString Ptr) As WINBOOLEAN
 	Dim i As Integer
 
 	nLine+=1
@@ -314,7 +314,7 @@ Sub CreateToolTip()
 
 End sub
 
-Function EnumProc(ByVal hWin As HWND,ByVal lParam As Integer) As Boolean
+Function EnumProc(ByVal hWin As HWND,ByVal lParam As Integer) As WINBOOLEAN
 	Dim tid As Integer
 	Dim pid As Integer
 
@@ -752,7 +752,7 @@ Function ImmediateProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPA
 End Function
 
 
-Function CheckLine(ByVal nLine As Integer,ByVal lpszFile As ZString Ptr) As Boolean
+Function CheckLine(ByVal nLine As Integer,ByVal lpszFile As ZString Ptr) As WINBOOLEAN
 	Dim i As Integer
 
 	If lpHandles->hred<>0 And lpHandles->hred<>lpHandles->hres Then
@@ -953,7 +953,7 @@ Sub EnableDebugMenu()
 
 End Sub
 
-Sub LockFiles(ByVal bLock As Boolean)
+Sub LockFiles(ByVal bLock As WINBOOLEAN)
 	Dim tci As TCITEM
 	Dim lpTABMEM As TABMEM Ptr
 	Dim i As Integer
@@ -1067,7 +1067,7 @@ Function CheckFileTime(ByVal lpszExe As ZString Ptr) As String
 
 End Function
 
-Function IsNoDebug(ByVal hWin As HWND, ByVal lpsz As ZString Ptr) As Boolean
+Function IsNoDebug(ByVal hWin As HWND, ByVal lpsz As ZString Ptr) As WINBOOLEAN
 	Dim As Integer nInx,lret
 	Dim buff As ZString*260
 	

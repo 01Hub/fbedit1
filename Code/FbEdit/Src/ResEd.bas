@@ -18,10 +18,11 @@
 #Include Once "Inc\ResEd.bi"
 
 
-#Define IDC_RARESED             1301
+#Define IDC_RARESED       1301
 
 
-Dim Shared ressize As WINSIZE=(300,170,0,52,100,100)
+Dim Shared ressize        As WINSIZE = (300, 170, 0, 52, 100, 100)
+Dim Shared TabIndexWindow As HWND 
 
 
 Function ResEdProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer

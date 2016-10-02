@@ -82,7 +82,7 @@ FileVersion=2.0.1.6
 CompanyName=
 [Size]
 2=0,0,0,0,4021
-1=0,0,0,0,21115
+1=0,0,0,0,19850
 3=0,0,0,0,8
 4=0,0,0,0,56
 8=0,0,0,0,1285
@@ -91,7 +91,7 @@ CompanyName=
 6=0,0,0,0,42
 10=0,0,0,0,0
 12=0,0,0,0,6
-11=0,0,0,0,1352
+11=0,0,0,0,970
 [Version-Inc]
 Options=52
 [Colref]
@@ -139,7 +139,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=7
+MilestoneOnDateDate=1
 MilestoneOnDateTimeYear=2003
 MilestoneOnDateTimeMonth=10
 MilestoneOnDateTimeDate=18
@@ -194,7 +194,7 @@ AutoLoad=11,2,9,1,4,3,6,8,7,12,10
 4=
 3=
 [PTimer]
-PTimer=226121818
+PTimer=230021922
 [Exports]
 1=GetDefEx
 2=GetDef

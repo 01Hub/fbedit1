@@ -6,22 +6,22 @@
 #Define REG_KEY_INVALID "REG_KEY_INVALID"
 
 Type RegLib
-	Declare Constructor(root as HKEY,key as String, create as Boolean=false)
+	Declare Constructor(root as HKEY,key as String, create as WINBOOLEAN=false)
 	Declare Destructor()
-	Declare Function createMe() as Boolean
-	Declare Function deleteMe() as Boolean
+	Declare Function createMe() as WINBOOLEAN
+	Declare Function deleteMe() as WINBOOLEAN
 	Declare Function getValue(v as String) as String
-	Declare Function setValue(v as String, s as String) as Boolean
+	Declare Function setValue(v as String, s as String) as WINBOOLEAN
 	Declare Property default() as String
 	Declare Property default(s as String)
-	exists As Boolean
+	exists As WINBOOLEAN
 Private:
 	hroot  As HKEY	
 	rkey   As HKEY
 	key    As String  
 End Type
 
-Constructor RegLib(root as HKEY,key as String, create as Boolean=false)
+Constructor RegLib(root as HKEY,key as String, create as WINBOOLEAN=false)
 	this.hroot=root
 	this.key=key
 	If RegOpenKeyEx(root, StrPtr(key), 0, KEY_ALL_ACCESS, @this.rkey) <> ERROR_SUCCESS Then	
@@ -39,7 +39,7 @@ Destructor RegLib()
 	RegCloseKey(rkey)
 End Destructor
 
-Function RegLib.createMe() As Boolean
+Function RegLib.createMe() As WINBOOLEAN
 	if RegCreateKeyEx(hroot,StrPtr(key),0,0,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,@rkey,0)=ERROR_SUCCESS then
 		exists=true
 	else
@@ -48,7 +48,7 @@ Function RegLib.createMe() As Boolean
 	return exists	
 End Function
 
-Function RegLib.deleteMe() As Boolean
+Function RegLib.deleteMe() As WINBOOLEAN
 	If RegDeleteKey(hroot,StrPtr(key)) = ERROR_SUCCESS Then
 	  exists=false
 	  return true
@@ -70,7 +70,7 @@ Function RegLib.getValue(v as String) as String
 	return out_
 End Function
 
-Function RegLib.setValue(v as String, s as String) as Boolean
+Function RegLib.setValue(v as String, s as String) as WINBOOLEAN
 	If exists=false then return false
 	return RegSetValueEx(rkey,StrPtr(v),0,REG_SZ,StrPtr(s),Len(s)+1)= ERROR_SUCCESS	
 End Function

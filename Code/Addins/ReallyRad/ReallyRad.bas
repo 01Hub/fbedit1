@@ -20,7 +20,7 @@
 #Define IDD_DLGREALLYRADCTRL    1100
 #Define IDC_EDTPROCNAMECTRL     1102
 
-Function JumpToCode() As Boolean
+Function JumpToCode() As WINBOOLEAN
 	Dim rapn As RAPNOTIFY
 
 	If Len(szProc) Then

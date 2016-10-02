@@ -4,7 +4,6 @@
 #Include "windows.bi"
 #Include Once "win\HtmlHelp.bi"
 
-#Define __crt_string_bi__
 #Include Once "tre\regex.bi"                                                 ' MOD 16.2.2012
 
 #Include Once "Inc\RAEdit.bi"
@@ -17,6 +16,7 @@
 #Include Once "Inc\FbEdit.bi"
 #Include Once "Inc\GUIHandling.bi"
 #Include Once "Inc\Project.bi"
+#Include Once "Inc\ResEd.bi"
 #Include Once "Inc\Resource.bi"
 #Include Once "Inc\SpecHandling.bi"
 #Include Once "Inc\TabTool.bi"
@@ -30,13 +30,13 @@
 
 'Type HH_AKLINK                                    ' HTML help
 '	cbStruct	    As Integer
-'	fReserved		As BOOLEAN
+'	fReserved		As WINBOOLEAN
 '	pszKeywords		As ZString Ptr
 '	pszUrl			As ZString Ptr
 '	pszMsgText		As ZString Ptr
 '	pszMsgTitle		As ZString Ptr
 '	pszWindow		As ZString Ptr
-'	fIndexOnFail	As BOOLEAN
+'	fIndexOnFail	As WINBOOLEAN
 'End Type
 '
 '#Define HH_DISPLAY_TOPIC	&H0000
@@ -372,7 +372,13 @@ Sub CheckMenu()
 	CheckMenuItem(ah.hcontextmenu,IDM_FORMAT_LOCK,IIf(SendMessage(ah.hraresed,DEM_ISLOCKED,0,0),MF_CHECKED,MF_UNCHECKED))
 	CheckMenuItem(ah.hcontextmenu,IDM_FORMAT_GRID,IIf(GetWindowLong(ah.hraresed,GWL_STYLE) And DES_GRID,MF_CHECKED,MF_UNCHECKED))
 	CheckMenuItem(ah.hcontextmenu,IDM_FORMAT_SNAP,IIf(GetWindowLong(ah.hraresed,GWL_STYLE) And DES_SNAPTOGRID,MF_CHECKED,MF_UNCHECKED))
-
+    
+    If      TabIndexWindow _
+    AndAlso IsWindowVisible (TabIndexWindow) Then
+        CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_CHECKED
+    Else
+        CheckMenuItem ah.hcontextmenu, IDM_FORMAT_TAB, MF_UNCHECKED
+    EndIf
 End Sub
 
 #Macro DisMenu (Condition, ID)
@@ -408,25 +414,25 @@ Sub EnableMenu ()
     Dim hMnu As HMENU = Any
 
 	hMnu = GetMenu (ah.hwnd)
-    Dim NoTabOpen          As BOOL      = FALSE
-    Dim AnyTabOpen         As BOOL      = FALSE
-	Dim TabIsRESED         As BOOL      = FALSE
-	Dim TabIsCODEED        As BOOL      = FALSE
-	Dim TabIsHEXED         As BOOL      = FALSE
-	Dim TabIsTEXTED        As BOOL      = FALSE
-	Dim TabIsCOTXED        As BOOL      = FALSE
-	Dim TabIsAlpha         As BOOL      = FALSE
-	Dim TabIsAny           As BOOL      = FALSE
-	Dim TabIsProject       As BOOL      = FALSE
-	Dim TabCanUndo         As BOOL      = FALSE
-	Dim TabCanRedo         As BOOL      = FALSE
-	Dim TabHasSel          As BOOL      = FALSE
-	Dim TabCanPaste        As BOOL      = FALSE
-	Dim TabHasDeclareQueue As BOOL      = FALSE
+    Dim NoTabOpen          As WINBOOLEAN   = FALSE
+    Dim AnyTabOpen         As WINBOOLEAN   = FALSE
+	Dim TabIsRESED         As WINBOOLEAN   = FALSE
+	Dim TabIsCODEED        As WINBOOLEAN   = FALSE
+	Dim TabIsHEXED         As WINBOOLEAN   = FALSE
+	Dim TabIsTEXTED        As WINBOOLEAN   = FALSE
+	Dim TabIsCOTXED        As WINBOOLEAN   = FALSE
+	Dim TabIsAlpha         As WINBOOLEAN   = FALSE
+	Dim TabIsAny           As WINBOOLEAN   = FALSE
+	Dim TabIsProject       As WINBOOLEAN   = FALSE
+	Dim TabCanUndo         As WINBOOLEAN   = FALSE
+	Dim TabCanRedo         As WINBOOLEAN   = FALSE
+	Dim TabHasSel          As WINBOOLEAN   = FALSE
+	Dim TabCanPaste        As WINBOOLEAN   = FALSE
+	Dim TabHasDeclareQueue As WINBOOLEAN   = FALSE
 	Dim EditorMode         As Long      = 0
 	Dim TabCount           As Integer   = 0
-	Dim PropertyValid      As BOOL      = FALSE
-	Dim BlockMode          As BOOL      = FALSE
+	Dim PropertyValid      As WINBOOLEAN   = FALSE
+	Dim BlockMode          As WINBOOLEAN   = FALSE
 	Dim ID                 As Integer   = Any
 	Dim chrg               As CHARRANGE = Any
 
@@ -436,7 +442,7 @@ Sub EnableMenu ()
     '    If hCtl = ah.hred OrElse hCtl = ah.hout OrElse hCtl = ah.himm Then
     '        FocusIsRAEdit = TRUE
     '    EndIf
-    'EndIf
+    '
 
 	If ah.hred Then
 		EditorMode    = GetWindowLong (ah.hred, GWL_ID)
@@ -451,17 +457,17 @@ Sub EnableMenu ()
 		TabCount      = SendMessage (ah.htabtool, TCM_GETITEMCOUNT, 0, 0)
 		PropertyValid = SendMessage (ah.hpr, PRM_GETCURSEL, 0, 0) <> LB_ERR
 		BlockMode     = (SendMessage (ah.hred, REM_GETMODE, 0, 0) And MODE_BLOCK) <> 0
-		TabCanUndo    = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANUNDO, 0, 0)) OrElse _
-		             	(TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANUNDO, 0, 0))
-		TabCanRedo    = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANREDO, 0, 0)) OrElse _
-		             	(TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANREDO, 0, 0))
+		TabCanUndo    = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANUNDO, 0, 0) <> 0) OrElse _
+		             	(TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANUNDO, 0, 0) <> 0)
+		TabCanRedo    = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANREDO, 0, 0) <> 0) OrElse _
+		             	(TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANREDO, 0, 0) <> 0)
 
         SendMessage ah.hred, EM_EXGETSEL, 0, Cast (LPARAM, @chrg)
 
         TabHasSel     = (TabIsAlpha AndAlso (chrg.cpMax <> chrg.cpMin)) OrElse _
-                        (TabIsRESED AndAlso	SendMessage (ah.hraresed, DEM_ISSELECTION, 0, 0))
-		TabCanPaste   = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANPASTE, CF_TEXT, 0)) OrElse _
-		                (TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANPASTE, 0, 0))
+                        (TabIsRESED AndAlso	SendMessage (ah.hraresed, DEM_ISSELECTION, 0, 0) <> 0 )
+		TabCanPaste   = (TabIsAlpha AndAlso SendMessage (ah.hred, EM_CANPASTE, CF_TEXT, 0) <> 0) OrElse _
+		                (TabIsRESED AndAlso SendMessage (ah.hraresed, DEM_CANPASTE, 0, 0) <> 0)
 
         'TabHasDeclareQueue = TabIsCODEED AndAlso fdc(fdcpos).hwnd
 	Else

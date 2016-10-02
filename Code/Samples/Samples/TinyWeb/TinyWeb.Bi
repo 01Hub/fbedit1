@@ -33,7 +33,7 @@ Type IWebBrowser
 	Navigate As Function(ByVal pif As Any ptr,ByVal bstrURL as WString ptr,ByVal Flags as any ptr,ByVal TargetFrameName as any ptr,ByVal PostData as any ptr,ByVal Headers as any ptr) As Integer
 End Type
 
-Dim AtlAxWinInit As Function As Boolean
+Dim AtlAxWinInit As Function As WINBOOLEAN
 Dim Shared AtlAxGetControl As Function (ByVal hWin As HWND,ByRef pp As Integer ptr) As Integer
 
 Dim Shared hDll As HMODULE

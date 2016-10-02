@@ -1159,7 +1159,7 @@ Sub WatchVars
 	Dim x As Integer
 	Dim typ As Integer
 	Dim res As RES
-	Dim bRed As Boolean
+	Dim bRed As WINBOOLEAN
 
 	If W(0).sVar<>"" Then
 		SendMessage(lpHandles->himm,WM_SETTEXT,0,0)

@@ -621,8 +621,8 @@ Function TabOptionsProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WP
 					SendDlgItemMessage(hTabDlg(3),IDC_GRDSTYLE,GM_ENDEDIT,nInx,FALSE)
 					nInx=SendDlgItemMessage(hTabDlg(4),IDC_GRDTYPE,GM_GETCURSEL,0,0)
 					SendDlgItemMessage(hTabDlg(4),IDC_GRDTYPE,GM_ENDEDIT,nInx,FALSE)
-					Select Case TRUE
-						Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPOPT1)
+					Select Case BST_CHECKED
+					    Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPOPT1)
 							nmeexp.nType=0
 						Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPOPT2)
 							nmeexp.nType=1
@@ -631,7 +631,7 @@ Function TabOptionsProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WP
 						Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPOPT4)
 							nmeexp.nType=3
 					End Select
-					Select Case TRUE
+					Select Case BST_CHECKED
 						Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPORTFILE)
 							nmeexp.nOutput=0
 						Case IsDlgButtonChecked(hTabDlg(0),IDC_RBNEXPORTCLIP)

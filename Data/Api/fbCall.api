@@ -24,6 +24,7 @@ Bin,number:Short|String
 Bit,value:Any,bit_number:Any
 BitReset,value:Any,bit_number:Any
 BitSet,value:Any,bit_number:Any
+CBool,expression:datatype|Boolean
 CByte,expression:datatype|Byte
 CDbl,expression:datatype|Double
 CInt,expression:datatype|Integer

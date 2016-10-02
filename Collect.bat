@@ -1,10 +1,10 @@
-
 @echo off
 
 setlocal enabledelayedexpansion
 
-del Collect.log
-
+if exist Collect.log (
+    del Collect.log
+)
 
 
 :: ###############################################

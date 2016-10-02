@@ -1,4 +1,4 @@
-Declare Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As Boolean) As Integer
+Declare Function CreateClass(ByVal hModule As HMODULE,ByVal fGlobal As WINBOOLEAN) As Integer
 
 #Define WBM_NAVIGATE		WM_USER+1
 #Define WBM_GOBACK		WM_USER+2

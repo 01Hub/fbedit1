@@ -1,0 +1,23 @@
+	
+ window layout
+
+	Window                       WndProc                hWnd
+
+	RESEDCLASS               <== ResEdProc              (hRes) 
+		DLGEDITCLASS         <== DlgEditProc            (hDEd)
+			DlgEditInvisible <== DesignInvisibleProc    (hInvisible)
+			RARESEDDIALOG    <== MakeDlgProc            (hDlg)
+				Control1
+				Control2
+                .
+                .
+                .
+			DlgEditDummy	 <== DesignDummyProc
+				Button1 (Tab sequence)
+				Button2
+				.
+                .
+                .
+		PROJECTCLASS         <== ProjectProc            (hPrj)
+		PROPERTYCLASS        <== PropertyProc           (hPrp)
+		TOOLBOXCLASS         <== ToolBoxProc            (hTlb)

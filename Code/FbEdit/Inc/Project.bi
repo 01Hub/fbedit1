@@ -41,31 +41,31 @@ Declare Function RemoveProjectPath (ByRef sFile As ZString) As ZString Ptr     '
 Declare Function CloseProject () As Integer
 Declare Function OpenProject () As Integer
 
-Declare Sub AddAProjectFile (Byref sFile As ZString, ByVal fModule As Boolean,ByVal fCreate As Boolean)
+Declare Sub AddAProjectFile (Byref sFile As ZString, ByVal fModule As WINBOOLEAN,ByVal fCreate As WINBOOLEAN)
 Declare Sub AddExistingProjectFile()
 Declare Sub AddExistingProjectModule()
 Declare Sub AddNewProjectModule()
 Declare Sub AddNewProjectFile()
-Declare Sub RemoveProjectFile (ByVal FileID As Integer, ByVal hTVItem As HTREEITEM, ByVal fDontAsk As BOOLEAN)
+Declare Sub RemoveProjectFile (ByVal FileID As Integer, ByVal hTVItem As HTREEITEM, ByVal fDontAsk As WINBOOLEAN)
 Declare Sub SetAsMainFile (ByVal FileID As Integer)
 Declare Sub ToggleProjectFile (ByRef OldFileID As Integer)
 
 Declare Sub InsertInclude (ByRef FileSpec As ZString, ByVal IncMode As IncludeMode)
 
-Declare Sub WriteProjectFileInfo (ByVal hWin As HWND, ByVal nInx As Integer, ByVal fProjectClose As BOOLEAN)
+Declare Sub WriteProjectFileInfo (ByVal hWin As HWND, ByVal nInx As Integer, ByVal fProjectClose As WINBOOLEAN)
 Declare Sub ReadProjectFileInfo (ByVal nInx As Integer, ByVal lpPFI As PFI Ptr)
 Declare Sub SetProjectFileInfo (ByVal hWin As HWND,ByVal lpPFI As PFI Ptr)
 
 Declare Sub RefreshProjectTree
 Declare Sub SelectTrvItem (Byref sFile As ZString)
-Declare Function GetTrvSelItemData (ByRef FileSpec As ZString, ByRef FileID As Integer, ByRef hTVItem As HTREEITEM, ByVal PathMode As PathType) As BOOLEAN
+Declare Function GetTrvSelItemData (ByRef FileSpec As ZString, ByRef FileID As Integer, ByRef hTVItem As HTREEITEM, ByVal PathMode As PathType) As WINBOOLEAN
 
 Declare Function ProjectProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 Declare Function NewProjectDlgProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WPARAM, ByVal lParam As LPARAM) As Integer
 Declare Function ProjectOptionDlgProc (ByVal hWin As HWND, ByVal uMsg As UINT, ByVal wParam As WPARAM, ByVal lParam As LPARAM) As Integer
 
 
-Extern fProject           As BOOLEAN             ' set by Add/Remove-Projectfile, reset by UpdateProperty
+Extern fProject           As WINBOOLEAN             ' set by Add/Remove-Projectfile, reset by UpdateProperty
 Extern ProjectDescription As ZString * 260
 Extern ProjectApiFiles    As ZString * 260
 Extern ProjectDeleteFiles As ZString * 260
@@ -73,9 +73,9 @@ Extern nMain              As Integer
 Extern nMainRC            As Integer             ' MOD 30.1.2012 ADD
 Extern fRecompile         As Integer
 Extern lpOldProjectProc   As WNDPROC
-Extern fAddMainFiles      As BOOLEAN
-Extern fCompileIfNewer    As BOOLEAN
-Extern fAddModuleFiles    As BOOLEAN
-Extern fIncVersion        As BOOLEAN
-Extern fRunCmd            As BOOLEAN
+Extern fAddMainFiles      As WINBOOLEAN
+Extern fCompileIfNewer    As WINBOOLEAN
+Extern fAddModuleFiles    As WINBOOLEAN
+Extern fIncVersion        As WINBOOLEAN
+Extern fRunCmd            As WINBOOLEAN
 

@@ -90,7 +90,7 @@ ExportResource proc uses esi edi,hMem:DWORD
 		mov		al,' '
 		stosb
 		mov		eax,[esi].RESOURCEMEM.ntype
-		push	eax
+;		push	eax                                           *** MOD
 		mov		ecx,sizeof RARSTYPE
 		mul		ecx
 		add		eax,offset rarstype
@@ -98,13 +98,13 @@ ExportResource proc uses esi edi,hMem:DWORD
 		add		edi,eax
 		mov		al,' '
 		stosb
-		pop		eax
-		.if eax<10
-			invoke SaveStr,edi,offset szDISCARDABLE
-			add		edi,eax
-			mov		al,' '
-			stosb
-		.endif
+;		pop		eax                                           *** MOD
+;		.if eax<10                                            *** MOD
+;			invoke SaveStr,edi,offset szDISCARDABLE           *** MOD ignored attribute
+;			add		edi,eax                                   *** MOD
+;			mov		al,' '                                    *** MOD
+;			stosb                                             *** MOD
+;		.endif                                                *** MOD
 		mov		al,'"'
 		stosb
 		xor		ecx,ecx

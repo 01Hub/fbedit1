@@ -493,7 +493,7 @@ Gridc				dd 0
 
 hInstance			dd ?
 hRes				dd ?
-hDEd				dd ?
+hDEd				dd ?               ; RARESEDDIALOG (userdefined dialog) (?)
 hTlb				dd ?
 hPrp				dd ?
 hPrj				dd ?

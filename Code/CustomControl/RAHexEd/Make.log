@@ -3,7 +3,7 @@ Copyright (C) Microsoft Corp. 1985-1998. All rights reserved.
 
 Using codepage 1252 as default
 Creating RAHexEd.res
-RC: RCPP -CP 1252 -f C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAHexEd\RCa02744 -g C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAHexEd\RDa02744 -DRC_INVOKED -D_WIN32 -pc\:/ -E -I. -I Src\ -I .
+RC: RCPP -CP 1252 -f C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAHexEd\RCa04236 -g C:\Program Files (x86)\FbEditSVN\Code\CustomControl\RAHexEd\RDa04236 -DRC_INVOKED -D_WIN32 -pc\:/ -E -I. -I Src\ -I .
 
 Src\RAHexEd.rc.
 Writing BITMAP:100,	lang:0x409,	size 1464.

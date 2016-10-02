@@ -1820,7 +1820,7 @@ DesignDummyProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 					invoke GetWindowRect,edx,addr rect
 					invoke ScreenToClient,hWin,addr rect.left
 					invoke GetCtrlID,ebx
-					invoke CreateWindowEx,NULL,addr szStaticClass,NULL,WS_CHILD or WS_VISIBLE or SS_CENTER or SS_NOTIFY,rect.left,rect.top,22,18,hWin,eax,hInstance,0
+					invoke CreateWindowEx,WS_EX_TOPMOST,addr szStaticClass,NULL,WS_CHILD or WS_VISIBLE or SS_CENTER or SS_NOTIFY,rect.left,rect.top,22,18,hWin,eax,hInstance,0
 					push	eax
 					invoke SendMessage,hTlt,WM_GETFONT,0,0
 					pop		edx
@@ -1830,11 +1830,18 @@ DesignDummyProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 			.endw
 			call	SetTabText
 		.endif
+	;.elseif eax==WM_WINDOWPOSCHANGING 
+		;PrintText "DesignDummyProc: WM_WINDOWPOSCHANGING "
+		;mov		ebx,lParam
+		;mov     eax,[ebx].WINDOWPOS.hWndInsertAfter
+		;PrintHex eax, "WINDOWPOS.hWndInsertAfter"
+
 	.elseif eax==WM_CTLCOLORSTATIC
+	    ;PrintText "DesignDummyProc: WM_CTLCOLORSTATIC"
 		invoke SetBkMode,wParam,TRANSPARENT
 		invoke SetTextColor,wParam,0FFFFFFh
 		invoke GetStockObject,BLACK_BRUSH
-		ret
+		ret                                      ; return background brush
 	.elseif eax==WM_COMMAND
 		invoke GetAsyncKeyState,VK_CONTROL
 		and		eax,8000h
@@ -2019,6 +2026,7 @@ CreateNewCtl proc uses esi edi,hOwner:DWORD,nType:DWORD,x:DWORD,y:DWORD,ccx:DWOR
 CreateNewCtl endp
 
 DesignInvisibleProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
+
 	LOCAL	pt:POINT
 	LOCAL	rect:RECT
 	LOCAL	rect1:RECT
@@ -2187,6 +2195,8 @@ DesignInvisibleProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARA
 			.endif
 		.endif
 	.elseif eax==WM_LBUTTONDOWN
+	    ;PrintText "DesignInvisibleProc: WM_LBUTTONDOWN"
+
 		.if des.nmnu
 			dec		des.dlgpt.x
 			invoke SendMessage,hWin,WM_MOUSEMOVE,wParam,lParam
@@ -2728,6 +2738,8 @@ DesignInvisibleProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARA
 			invoke SendMessage,ecx,WM_NOTIFY,edx,addr dblclk
 		.endif
 	.elseif eax==WM_SETCURSOR
+	    ;PrintText "DesignInvisibleProc: WM_SETCURSOR"
+
 		invoke GetCursorPos,addr pt
 		invoke ScreenToClient,hInvisible,addr pt
 		mov		ebx,des.hdlg
@@ -4016,6 +4028,8 @@ MakeDlgProc proc uses esi,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 			pop		ebx
 		.endif
 	.elseif eax==WM_DRAWITEM
+	    ;PrintText "MakeDlgProc: WM_DRAWITEM"
+
 		mov		esi,lParam
 		invoke GetStockObject,GRAY_BRUSH
 		invoke FillRect,[esi].DRAWITEMSTRUCT.hdc,addr [esi].DRAWITEMSTRUCT.rcItem,eax
@@ -4242,7 +4256,7 @@ MakeDialog proc uses esi edi ebx,hMem:DWORD,nSelID:DWORD
 	LOCAL	racol:RACOLOR
 	LOCAL	buffer[MaxCap]:BYTE
 
-	;Get convertiion
+	;Get conversion
 	mov		dlgps,10
 	mov		dlgfn,0
 	invoke CreateDialogIndirectParam,hInstance,offset dlgdata,hDEd,offset TestProc,0

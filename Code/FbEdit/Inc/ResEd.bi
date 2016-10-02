@@ -20,6 +20,7 @@ End Type
 Declare Function ResEdProc (ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARAM,ByVal lParam As LPARAM) As Integer
 
 
-Extern ressize As WINSIZE
+Extern ressize        As WINSIZE
+Extern TabIndexWindow As HWND 
 
 

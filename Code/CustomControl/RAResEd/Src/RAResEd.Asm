@@ -352,6 +352,12 @@ ToolBoxProc	proc uses ebx esi,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 		mov		pt.x,edx
 		mov		pt.y,eax
 		invoke ToolBoxSize,pt.x
+;		.if hTabSet                               ; *** TODO
+;			invoke InvalidateRect,hTabSet,NULL,TRUE
+;			invoke UpdateWindow,hTabSet
+;		.endif
+;    	invoke SendMessage,hRes,WM_SIZE,SIZE_RESTORED,0
+	
 	.elseif eax==WM_DESTROY
 		mov		esi,offset hButtons+NoOfButtons*4
 		xor		ebx,ebx
@@ -405,7 +411,7 @@ ProjectProc	proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 
 ProjectProc	endp
 
-DlgEditProc proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
+DlgEditProc proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM      ; DLGEDITCLASS
 	LOCAL	sinf:SCROLLINFO
 	LOCAL	rect:RECT
 	LOCAL	ps:PAINTSTRUCT
@@ -455,10 +461,14 @@ DlgEditProc proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 		invoke CreateWindowEx,WS_EX_TRANSPARENT,addr szDlgEditInvisible,0,WS_CHILD,0,0,16383,16383,hWin,0,hInstance,0
 		mov		hInvisible,eax
 	.elseif eax==WM_MOUSEMOVE
+		;PrintText "DlgEditProc: WM_MOUSEMOVE"
+		
 		.if hStatus
 			invoke SendMessage,hStatus,SB_SETTEXT,nStatus,offset szNULL
 		.endif
 	.elseif eax==WM_PAINT
+	    ;PrintText "DlgEditProc: WM_PAINT"
+
 		invoke BeginPaint,hWin,addr ps
 		invoke FillRect,ps.hdc,addr ps.rcPaint,hBrBack
 		invoke EndPaint,hWin,addr ps
@@ -1188,15 +1198,15 @@ ResEdProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 		invoke GetWindowLong,hWin,GWL_STYLE
 		and		eax,0FFFFh
 		or		eax,WS_CHILD or WS_VISIBLE or WS_VSCROLL or WS_HSCROLL
-		invoke CreateWindowEx,200h,addr szDlgEditClass,0,eax,0,0,0,0,hWin,0,hInstance,0
+		invoke CreateWindowEx,WS_EX_CLIENTEDGE or WS_EX_TOPMOST,addr szDlgEditClass,0,eax,0,0,0,0,hWin,0,hInstance,0
 		mov		hDEd,eax
-		invoke CreateWindowEx,200h,addr szProjectClass,0,56000000h,0,0,0,0,hWin,0,hInstance,0
+		invoke CreateWindowEx,WS_EX_CLIENTEDGE,addr szProjectClass,0,56000000h,0,0,0,0,hWin,0,hInstance,0
 		mov		hPrj,eax
 		invoke CreateWindowEx,0h,addr szPropertyClass,0,56000000h,0,0,0,0,hWin,0,hInstance,0
 		mov		hPrp,eax
 		invoke CreateWindowEx,0h,addr szToolBoxClass,0,56000000h,0,0,0,0,hWin,0,hInstance,0
 		mov		hTlb,eax
-		invoke CreateWindowEx,200h,addr szRAEditClass,0,WS_CHILD or WS_VISIBLE or WS_CLIPCHILDREN or WS_CLIPSIBLINGS or STYLE_NOSIZEGRIP or STYLE_NOCOLLAPSE or STYLE_NOLINENUMBER,0,0,0,0,hWin,0,hInstance,0
+		invoke CreateWindowEx,WS_EX_CLIENTEDGE,addr szRAEditClass,0,WS_CHILD or WS_VISIBLE or WS_CLIPCHILDREN or WS_CLIPSIBLINGS or STYLE_NOSIZEGRIP or STYLE_NOCOLLAPSE or STYLE_NOLINENUMBER,0,0,0,0,hWin,0,hInstance,0
 		mov		hOut,eax
 		invoke SendMessage,hOut,REM_SETWORDGROUP,0,2
 		invoke RtlZeroMemory,addr lf,size lf
@@ -2044,7 +2054,7 @@ ResEdProc proc uses ebx,hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
 				pop		edx
 				neg		eax
 				neg		edx
-				invoke CreateWindowEx,WS_EX_TRANSPARENT,addr szDlgEditDummyClass,NULL,WS_CHILD or WS_VISIBLE,eax,edx,16384,16384,hDEd,123456789,hInstance,0
+				invoke CreateWindowEx,WS_EX_TRANSPARENT or WS_EX_TOPMOST,addr szDlgEditDummyClass,NULL,WS_CHILD or WS_VISIBLE,eax,edx,16384,16384,hDEd,123456789,hInstance,0
 				mov		hTabSet,eax
 				invoke ShowWindow,hInvisible,SW_HIDE
 				invoke ShowWindow,hTabSet,SW_HIDE

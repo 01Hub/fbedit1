@@ -86,7 +86,7 @@ Dim Shared lpOldApiListProc   As WNDPROC
 Dim Shared ModuleCCLsDefProc  As WNDPROC
 Dim Shared nProjectGroup      As Integer
 
-Dim Shared fProject           As BOOLEAN             ' set by Add/Remove-Projectfile, reset by UpdateProperty
+Dim Shared fProject           As WINBOOLEAN             ' set by Add/Remove-Projectfile, reset by UpdateProperty
 Dim Shared ProjectDescription As ZString * 260
 Dim Shared ProjectApiFiles    As ZString * 260
 Dim Shared ProjectDeleteFiles As ZString * 260
@@ -94,11 +94,11 @@ Dim Shared nMain              As Integer
 Dim Shared nMainRC            As Integer             ' MOD 30.1.2012 ADD
 Dim Shared fRecompile         As Integer
 Dim Shared lpOldProjectProc   As WNDPROC
-Dim Shared fAddMainFiles      As BOOLEAN
-Dim Shared fCompileIfNewer    As BOOLEAN
-Dim Shared fAddModuleFiles    As BOOLEAN
-Dim Shared fIncVersion        As BOOLEAN
-Dim Shared fRunCmd            As BOOLEAN
+Dim Shared fAddMainFiles      As WINBOOLEAN
+Dim Shared fCompileIfNewer    As WINBOOLEAN
+Dim Shared fAddModuleFiles    As WINBOOLEAN
+Dim Shared fIncVersion        As WINBOOLEAN
+Dim Shared fRunCmd            As WINBOOLEAN
 
 
 ' ---------------------------------------------------------------------
@@ -333,7 +333,7 @@ Function GetFamilyName (ByRef sFile As ZString) As String
 
 End Function
 
-Function GetTrvSelItemData (ByRef FileSpec As ZString, ByRef FileID As Integer, ByRef hTVItem As HTREEITEM, ByVal PathMode As PathType) As BOOLEAN
+Function GetTrvSelItemData (ByRef FileSpec As ZString, ByRef FileID As Integer, ByRef hTVItem As HTREEITEM, ByVal PathMode As PathType) As WINBOOLEAN
 
     ' FileSpec [out]
     ' FileID   [out]
@@ -1122,7 +1122,7 @@ Sub SelectTrvItem(Byref sFile As ZString)
 
 End Sub
 
-Sub AddProjectFile(Byref sFile As ZString,ByVal fModule As Boolean)
+Sub AddProjectFile(Byref sFile As ZString,ByVal fModule As WINBOOLEAN)
 
 	Dim sItem As ZString * 260
 	Dim nInx  As Integer = Any
@@ -1152,7 +1152,7 @@ Sub AddProjectFile(Byref sFile As ZString,ByVal fModule As Boolean)
     EndIf
 End Sub
 
-Sub AddAProjectFile(Byref sFile As zString,ByVal fModule As Boolean,ByVal fCreate As Boolean)
+Sub AddAProjectFile(Byref sFile As zString,ByVal fModule As WINBOOLEAN,ByVal fCreate As WINBOOLEAN)
 	Dim hFile As HANDLE
 	Dim buff As ZString*256
 	
@@ -1307,7 +1307,7 @@ Sub AddExistingProjectModule ()
 
 End Sub
 
-Sub RemoveProjectFile (ByVal FileID As Integer, ByVal hTVItem As HTREEITEM, ByVal fDontAsk As BOOLEAN)
+Sub RemoveProjectFile (ByVal FileID As Integer, ByVal hTVItem As HTREEITEM, ByVal fDontAsk As WINBOOLEAN)
 
 	Dim FileSpec As ZString * MAX_PATH
     Dim TabId    As Integer            = Any
@@ -1704,7 +1704,7 @@ Sub ReadProjectFileInfo(ByVal nInx As Integer,ByVal lpPFI As PFI Ptr)
 
 End Sub
 
-Sub WriteProjectFileInfo(ByVal hWin As HWND,ByVal nInx As Integer,ByVal fProjectClose As BOOLEAN)
+Sub WriteProjectFileInfo(ByVal hWin As HWND,ByVal nInx As Integer,ByVal fProjectClose As WINBOOLEAN)
 	Dim pfi As PFI
 	Dim chrg As CHARRANGE
 	Dim sTmp As ZString*32
@@ -1799,7 +1799,7 @@ Sub UseTemplate(Byref sTemplateFile As ZString,Byref sProName As zString)
 	Dim sName As String
 	Dim sFile As String
 	Dim sPath As String
-	Dim fPro As Boolean
+	Dim fPro As WINBOOLEAN
 	Dim nlen As Integer
 	Dim npos As Integer
 	Dim sData As ZString*32
@@ -1912,7 +1912,7 @@ Sub UseTemplate(Byref sTemplateFile As ZString,Byref sProName As zString)
 
 End Sub
 
-Function CreateNewProject(ByVal hWin As HWND,ByVal hTab1 As HWND,ByVal hTab2 As HWND) As Boolean
+Function CreateNewProject(ByVal hWin As HWND,ByVal hTab1 As HWND,ByVal hTab2 As HWND) As WINBOOLEAN
 	Dim nInx As Integer
 	Dim sItem As ZString*260
 	Dim sFile As ZString*260
@@ -2667,7 +2667,7 @@ Function ProjectProc(ByVal hWin As HWND,ByVal uMsg As UINT,ByVal wParam As WPARA
 	Dim ht As TVHITTESTINFO
 	Dim tvi As TV_ITEM
 	Dim sFile As String*260
-	Dim fCtrl As Boolean
+	Dim fCtrl As WINBOOLEAN
 
 	Select Case uMsg
 		Case WM_LBUTTONDBLCLK
