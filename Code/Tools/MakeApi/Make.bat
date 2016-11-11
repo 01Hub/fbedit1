@@ -2,6 +2,9 @@
 setlocal enableDelayedExpansion
 
 
+if not exist Build (mkdir Build)
+
+
 if "%FBC_PATH%"=="" (
     call:GetIniValue "..\..\..\Make.ini" "FBHome" FBHome
 ) else (

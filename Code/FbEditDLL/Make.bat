@@ -4,6 +4,8 @@
 call:GetIniValue "..\..\Make.ini" "FBHome" FBHome
 
 
+if not exist Build (mkdir Build)
+
 
 echo .
 echo *** compiling ***

@@ -3,6 +3,7 @@
 
 call:GetIniValue "..\..\Make.ini" "FBHome" FBHome
 
+if not exist Build (mkdir Build)
 
 set BFLAGS_MODULE_GENGAS=-c -v -w param -w escape -w all -w next
 set BFLAGS_MODULE_GENGCC=-c -v -w param -w escape -w all -w next -gen gcc -O 2

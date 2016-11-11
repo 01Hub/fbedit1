@@ -3,6 +3,13 @@
 
 
 echo .
+echo *** build VKDebug ***
+cd Code\VKDebug
+call make.bat || goto ERR_Exit
+cd ..\..
+
+
+echo .
 echo *** build RACodeComplete ***
 cd Code\CustomControl\RACodeComplete
 call make.bat || goto ERR_Exit
@@ -63,13 +70,6 @@ echo *** build RATools ***
 cd Code\CustomControl\RATools
 call make.bat || goto ERR_Exit
 cd ..\..\..
-
-
-echo .
-echo *** build VKDebug ***
-cd Code\VKDebug
-call make.bat || goto ERR_Exit
-cd ..\..
 
 
 echo .

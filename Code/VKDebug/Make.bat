@@ -6,6 +6,9 @@ call:GetIniValue "..\..\Make.ini" "MasmHome" MasmHome
 call:GetIniValue "..\..\Make.ini" "FBHome" FBHome
 
 
+if not exist Build (mkdir Build)
+
+
 echo .
 echo *** compling BAS modules ***
 "%FBHome%\fbc.exe" -v -c Src\GetOutpWindow.bas -o GetOutpWindow.o > Make.log || goto ERR_Exit
@@ -26,10 +29,10 @@ echo *** linking library ***
 
 echo .
 echo *** exposing libraries ***
-xcopy Build\VKDebug.lib Build\libVKDebug.a /d /y || goto ERR_Exit
-xcopy "%MasmHome%\lib\masm32.lib" Build\libmasm32.a /d /y || goto ERR_Exit
-xcopy Src\VKDebug.inc Build\VKDebug.inc /d /y || goto ERR_Exit
-xcopy Src\VKDebug.bi Build\VKDebug.bi /d /y || goto ERR_Exit
+copy Build\VKDebug.lib Build\libVKDebug.a /d /y || goto ERR_Exit
+copy "%MasmHome%\lib\masm32.lib" Build\libmasm32.a /d /y || goto ERR_Exit
+copy Src\VKDebug.inc Build\VKDebug.inc /d /y || goto ERR_Exit
+copy Src\VKDebug.bi Build\VKDebug.bi /d /y || goto ERR_Exit
 
 
 

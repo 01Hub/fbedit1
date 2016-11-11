@@ -10,6 +10,9 @@ set MasmInc=%MasmHome%\Include
 set MasmLib=%MasmHome%\Lib
 
 
+if not exist Build (mkdir Build)
+
+
 echo .
 echo *** compiling RC ***
 "%MasmBin%\RC.EXE" /v /fo"RAEdit.res"  Src\RAEdit.rc > Make.log || goto ERR_Exit

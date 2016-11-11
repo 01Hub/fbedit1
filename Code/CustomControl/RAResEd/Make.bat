@@ -10,6 +10,9 @@ set MasmInc=%MasmHome%\Include
 set MasmLib=%MasmHome%\Lib
 
 
+if not exist Build (mkdir Build)
+
+
 echo .
 echo *** compiling ASMs ***
 "%MasmBin%\ML.EXE" /c /coff /Cp /I"%MasmInc%" "Src\RAResEd.asm" > Make.log || goto ERR_Exit

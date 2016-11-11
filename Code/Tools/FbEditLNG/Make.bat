@@ -4,6 +4,10 @@
 
 call:GetIniValue "..\..\..\Make.ini" "FBHome" FBHome
 
+
+if not exist Build (mkdir Build)
+
+
 echo.
 echo *** compiling .rc ***
 
@@ -52,6 +56,10 @@ echo *** compiling .bas ***
 echo.
 echo *** linking .exe ***
 "%FBHome%\fbc" -s gui -v "FbEditLNG.o" "FbEditLNG.Rc.o" -x "Build\FbEditLNG.exe" >> Make.log || goto ERR_Exit
+
+echo.
+echo *** copying language files ***
+xcopy Addins.lng Build\ >> Make.log || goto ERR_Exit
 
 echo .
 echo *** cleanup ***
